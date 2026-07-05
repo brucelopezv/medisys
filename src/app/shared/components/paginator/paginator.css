@@ -1,0 +1,128 @@
+/* ==========================================================================
+   PAGINACIÓN MÉDICA MODERNA
+   ========================================================================== */
+.med-pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 0;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   ESCRITORIO
+   -------------------------------------------------------------------------- */
+.pagination-desktop {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Espacio uniforme entre grupos */
+}
+
+.page-numbers {
+    display: flex;
+    gap: 6px;
+    margin: 0 8px;
+    /* Separación extra entre números y flechas */
+}
+
+/* Botón base unificado */
+.page-btn {
+    height: 38px;
+    min-width: 38px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid var(--med-border, #e2e8f0);
+    border-radius: 10px;
+    /* Consistencia de "squircle" */
+    color: var(--med-text-muted, #64748b);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Estado Hover */
+.page-btn:hover:not(:disabled) {
+    background-color: var(--med-bg, #f0f4f8);
+    color: var(--med-primary, #0ea5e9);
+    border-color: #bae6fd;
+    transform: translateY(-1px);
+    /* Ligero levantamiento táctil */
+}
+
+/* Estado Activo (Página actual) */
+.page-btn.active {
+    background: linear-gradient(135deg, var(--med-primary, #0ea5e9) 0%, #0284c7 100%);
+    color: #ffffff;
+    border-color: var(--med-primary, #0ea5e9);
+    box-shadow: 0 4px 10px -2px rgba(14, 165, 233, 0.4);
+}
+
+/* Estado Deshabilitado */
+.page-btn:disabled {
+    background-color: #f8fafc;
+    color: #cbd5e1;
+    border-color: var(--med-border, #e2e8f0);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.nav-btn {
+    font-size: 0.85rem;
+    /* Los íconos un poco más sutiles */
+}
+
+/* --------------------------------------------------------------------------
+   MÓVIL
+   -------------------------------------------------------------------------- */
+.pagination-mobile {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
+    background-color: #ffffff;
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid var(--med-border, #e2e8f0);
+    box-shadow: 0 4px 10px -5px rgba(0, 0, 0, 0.05);
+    /* Efecto de píldora flotante */
+}
+
+/* Botones específicos de móvil */
+.nav-btn-mobile {
+    gap: 6px;
+    border: none;
+    background-color: var(--med-bg, #f0f4f8);
+    border-radius: 8px;
+}
+
+.nav-btn-mobile:hover:not(:disabled) {
+    background-color: #e0f2fe;
+}
+
+/* Texto de información móvil */
+.page-info {
+    font-size: 0.9rem;
+    color: var(--med-text-muted, #64748b);
+}
+
+.page-highlight {
+    color: var(--med-text-dark, #1e293b);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .pagination-desktop {
+        display: none;
+    }
+
+    .pagination-mobile {
+        display: flex;
+    }
+}

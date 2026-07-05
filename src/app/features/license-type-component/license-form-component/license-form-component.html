@@ -1,0 +1,235 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4">
+        @if (!license.id) {
+        <h2 class="page-title"><i class="fa-regular fa-credit-card me-2 text-primary"></i> Crear Nuevo Plan</h2>
+        <p class="page-subtitle">Configure las características, límites y módulos de un nuevo plan de suscripción.</p>
+        } @else {
+        <h2 class="page-title"><i class="fa-solid fa-pen-to-square me-2 text-primary"></i> Editar Plan</h2>
+        <p class="page-subtitle">Modificando la configuración del plan: <strong>{{ license.name }}</strong></p>
+        }
+    </div>
+
+    <div class="med-form-card">
+        <form id="licenseTypeForm" #form="ngForm">
+
+            <div class="form-section">
+                <h5 class="section-title"><i class="fa-solid fa-circle-info text-slate me-2"></i> Información Básica
+                </h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Nombre del Plan <span class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-tag input-icon"></i>
+                            <input type="text" class="custom-input" [(ngModel)]="license.name" id="name" name="name"
+                                required placeholder="Ej: Licencia Premium">
+                        </div>
+                        <div class="form-text small mt-1">Nombre único para identificar este plan.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="status" class="form-label">Estado <span class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-signal input-icon"></i>
+                            <select [(ngModel)]="license.status" class="custom-input form-select"
+                                style="padding-left: 45px;" id="status" name="status" required>
+                                <option value="ACTIVE">Activo</option>
+                                <option value="INACTIVE">Inactivo</option>
+                                <option value="DEPRECATED">Obsoleto</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="description" class="form-label">Descripción</label>
+                        <div class="input-wrapper align-items-start">
+                            <i class="fa-solid fa-align-left input-icon mt-3"></i>
+                            <textarea [(ngModel)]="license.description" class="custom-input custom-textarea"
+                                id="description" name="description" rows="2"
+                                placeholder="Describa las características principales de este plan..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h5 class="section-title"><i class="fa-solid fa-sliders text-slate me-2"></i> Límites de la Licencia
+                </h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-4">
+                        <label for="max_patients" class="form-label">Máx. Expedientes <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-layer-group input-icon text-primary"></i>
+                            <input [(ngModel)]="license.maxPatients" type="number" class="custom-input fw-bold"
+                                id="max_patients" name="max_patients" min="1" required>
+                        </div>
+                        <div class="form-text small mt-1">Cantidad de pacientes permitidos.</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="max_users" class="form-label">Máx. Usuarios <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-users input-icon text-success"></i>
+                            <input [(ngModel)]="license.maxUsers" type="number" class="custom-input fw-bold"
+                                id="max_users" name="max_users" min="1" required>
+                        </div>
+                        <div class="form-text small mt-1">Personal administrativo permitido.</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="max_doctors" class="form-label">Máx. Doctores <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user-doctor input-icon text-info"></i>
+                            <input [(ngModel)]="license.maxDoctors" type="number" class="custom-input fw-bold"
+                                id="max_doctors" name="max_doctors" min="1" required>
+                        </div>
+                        <div class="form-text small mt-1">Médicos tratantes permitidos.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h5 class="section-title"><i class="fa-solid fa-gear text-slate me-2"></i> Configuraciones Adicionales
+                </h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6 d-flex flex-column justify-content-center gap-3">
+                        <div class="med-switch-card">
+                            <div class="form-check form-switch d-flex align-items-center gap-2 mb-0">
+                                <input [(ngModel)]="license.isCustom" class="form-check-input mt-0 fs-4" type="checkbox"
+                                    id="is_custom" name="is_custom">
+                                <label class="form-check-label fw-bold text-dark mb-0 ms-2" style="cursor:pointer;"
+                                    for="is_custom">Plan Personalizado</label>
+                            </div>
+                            <p class="small text-muted ms-5 ps-1 mb-0 mt-1">Marcar si es un plan hecho a medida para un
+                                cliente específico.</p>
+                        </div>
+
+                        <div class="med-switch-card">
+                            <div class="form-check form-switch d-flex align-items-center gap-2 mb-0">
+                                <input [(ngModel)]="license.visibleToPublic" class="form-check-input mt-0 fs-4"
+                                    type="checkbox" id="visible_to_public" name="visible_to_public"
+                                    [checked]="license.visibleToPublic">
+                                <label class="form-check-label fw-bold text-dark mb-0 ms-2" style="cursor:pointer;"
+                                    for="visible_to_public">Visible al Público</label>
+                            </div>
+                            <p class="small text-muted ms-5 ps-1 mb-0 mt-1">Mostrar este tipo de licencia en la página
+                                web pública.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="notes" class="form-label">Notas Internas</label>
+                        <div class="input-wrapper align-items-start">
+                            <i class="fa-solid fa-note-sticky input-icon mt-3"></i>
+                            <textarea [(ngModel)]="license.notes" class="custom-input custom-textarea bg-light-custom"
+                                id="notes" name="notes" rows="4"
+                                placeholder="Notas exclusivas para uso interno del equipo..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section border-0 mb-0">
+                <h5 class="section-title"><i class="fa-solid fa-cubes text-slate me-2"></i> Módulos Incluidos</h5>
+                <p class="text-muted small mb-3">Selecciona los módulos de la plataforma que estarán habilitados para
+                    este plan.</p>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="med-search-input-group">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input #searchInput type="text" class="med-custom-search" placeholder="Buscar módulos..."
+                                (input)="onSearchModules(searchInput.value)">
+                        </div>
+                        <div class="form-text small mt-2">
+                            Mostrando {{ filteredModules.length }} de {{ modules.length }} módulos
+                        </div>
+                    </div>
+                </div>
+
+                <div class="selection-grid-container">
+                    <div class="row g-3">
+                        @if (filteredModules.length > 0) {
+                        @for (module of filteredModules; track module.id) {
+                        <div class="col-md-6 col-lg-4">
+                            <label class="item-selection-card" [class.selected]="selectedModuleIds.includes(module.id)">
+                                <div class="d-flex align-items-start gap-3">
+                                    <div class="custom-checkbox mt-1">
+                                        <input class="form-check-input" type="checkbox" [id]="'module_' + module.id"
+                                            [checked]="selectedModuleIds.includes(module.id)"
+                                            (change)="onModuleChange(module.id, $event)">
+                                    </div>
+                                    <div class="w-100">
+                                        <div class="item-title d-flex align-items-center justify-content-between">
+                                            {{ module.name }}
+
+                                            @if (module.status) {
+                                            <span class="status-badge" style="font-size: 0.7rem; padding: 3px 8px;"
+                                                [ngClass]="{
+        'badge-active': module.status === ModuleStatus.ACTIVO,
+        'badge-inactive': module.status === ModuleStatus.INACTIVO
+    }">
+                                                <i class="fa-solid fa-circle me-1"
+                                                    style="font-size: 0.35rem; vertical-align: middle;"></i>
+                                                {{ module.status }}
+                                            </span>
+                                            }
+                                        </div>
+                                        @if (module.description) {
+                                        <div class="item-desc mt-1">{{ module.description }}</div>
+                                        }
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        }
+                        } @else {
+                        <div class="col-12">
+                            <div class="empty-selection-box">
+                                <i class="fa-solid fa-inbox text-slate fs-2 mb-2"></i>
+                                <p class="mb-2">No se encontraron módulos con "{{ searchInput.value }}"</p>
+                                @if (searchInput.value) {
+                                <button type="button" class="med-btn-secondary btn-sm"
+                                    (click)="onSearchModules(''); searchInput.value = ''">
+                                    Limpiar búsqueda
+                                </button>
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                @if (selectedModuleIds.length > 0) {
+                <div class="selection-summary-alert mt-3">
+                    <i class="fa-solid fa-circle-check text-success me-2"></i>
+                    <strong>{{ selectedModuleIds.length }}</strong> módulo(s) incluido(s) en este plan.
+                </div>
+                }
+            </div>
+
+            <div class="form-footer">
+                <button type="button" class="med-btn-secondary px-4" (click)="cancel()">
+                    <i class="fa-solid fa-arrow-left me-2"></i> Cancelar
+                </button>
+
+                @if (!license.id) {
+                <button type="submit" class="btn-add px-4" [disabled]="!form.form.valid" (click)="create()">
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Crear Plan
+                </button>
+                } @else {
+                <button type="submit" class="btn-add px-4" [disabled]="!form.form.valid" (click)="update()">
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Actualizar Plan
+                </button>
+                }
+            </div>
+
+        </form>
+    </div>
+</div>

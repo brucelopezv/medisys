@@ -1,0 +1,108 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4 d-flex justify-content-between align-items-end flex-wrap gap-3">
+        <div>
+            <h2 class="page-title">Gestión de Permisos</h2>
+            <p class="page-subtitle">Administre las acciones específicas permitidas en cada módulo del sistema.</p>
+        </div>
+
+        @if (permissions!.length > 0 || terminoBusqueda) {
+        <div class="header-actions">
+            <button class="btn-add" id="btnNuevoPermiso" [routerLink]="['/permissions/form']">
+                <i class="fa-solid fa-plus me-2"></i> Nuevo Permiso
+            </button>
+        </div>
+        }
+    </div>
+
+    @if (permissions!.length > 0 || terminoBusqueda) {
+    <div class="med-toolbar mb-4">
+        <app-searchbar-component placeholder="Buscar por acción o módulo..." (buscar)="onBuscar($event)"
+            (limpiar)="onLimpiarBusqueda()">
+        </app-searchbar-component>
+    </div>
+    }
+
+    <div class="data-section">
+
+        @if (permissions!.length > 0 && permissionsSearched!.length === 0 && terminoBusqueda) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper search-empty">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3 class="empty-title">Sin resultados</h3>
+            <p class="empty-message">No encontramos permisos que coincidan con
+                "<strong>{{terminoBusqueda}}</strong>".<br>Intenta con otro término de búsqueda.</p>
+            <button class="med-btn-secondary mt-3" (click)="onLimpiarBusqueda()">
+                <i class="fa-solid fa-eraser me-2"></i> Limpiar Búsqueda
+            </button>
+        </div>
+        }
+
+        @if (permissions!.length === 0) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper data-empty">
+                <i class="fa-solid fa-key"></i>
+            </div>
+            <h3 class="empty-title">No hay permisos registrados</h3>
+            <p class="empty-message">Actualmente no existen permisos base configurados en el sistema. Comience creando
+                la primera acción permitida.</p>
+            <button class="btn-add mt-3" id="btnAgregarPermiso" [routerLink]="['/permissions/form']">
+                <i class="fa-solid fa-plus me-2"></i> Crear Primer Permiso
+            </button>
+        </div>
+        }
+
+        @if (permissionsSearched!.length > 0) {
+        <div class="med-table-card">
+            <table class="table med-table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" width="15%">Acción</th>
+                        <th scope="col" width="20%">Módulo Afectado</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col" class="text-center" width="100">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (permission of permissionsSearched; track permission.id) {
+                    <tr>
+                        <td data-label="Acción" class="fw-bold">
+                            <span class="badge border px-2 py-1"
+                                style="background-color: #f1f5f9; color: #475569; border-color: #cbd5e1 !important; font-family: monospace; font-size: 0.85rem; letter-spacing: 0.5px;">
+                                {{permission.action}}
+                            </span>
+                        </td>
+
+                        <td data-label="Módulo" class="fw-bold text-dark">
+                            <i class="fa-solid fa-cube text-primary me-2 opacity-50"></i>
+                            {{permission.moduleName}}
+                        </td>
+
+                        <td data-label="Descripción" class="text-muted">
+                            {{permission.description}}
+                        </td>
+
+                        <td data-label="Acciones" class="text-md-center border-0-mobile">
+                            <div class="table-actions justify-content-end justify-content-md-center">
+                                <button class="btn-action edit" title="Editar"
+                                    [routerLink]="['/permissions/form', permission.id]">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+        @if (paginador) {
+        <div class="mt-4 pb-4">
+            <app-paginator [paginador]="paginador" (paginaSeleccionada)="onPaginaSeleccionada($event)"></app-paginator>
+        </div>
+        }
+
+    </div>
+</div>

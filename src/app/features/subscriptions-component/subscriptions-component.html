@@ -1,0 +1,122 @@
+<div class="dashboard-container">
+    
+    <div class="page-header mb-4 d-flex justify-content-between align-items-end flex-wrap gap-3">
+        <div>
+            <h2 class="page-title">Gestión de Suscripciones</h2>
+            <p class="page-subtitle">Administre los planes activos, vigencias y estados de sus clientes institucionales.</p>
+        </div>
+
+        @if (subscriptions().length > 0 || terminoBusqueda()) {
+        <div class="header-actions">
+            <button class="btn-add" id="btnNuevaSuscripcion" [routerLink]="['/subscriptions/form']">
+                <i class="fa-solid fa-plus me-2"></i> Nueva Suscripción
+            </button>
+        </div>
+        }
+    </div>
+
+    @if (subscriptions().length > 0 || terminoBusqueda()) {
+    <div class="med-toolbar mb-4">
+        <app-searchbar-component 
+            placeholder="Buscar por ID de Empresa..." 
+            (buscar)="onBuscar($event)"
+            (limpiar)="onLimpiarBusqueda()">
+        </app-searchbar-component>
+    </div>
+    }
+
+    <div class="data-section">
+
+        @if (subscriptions().length === 0 && terminoBusqueda()) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper search-empty">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3 class="empty-title">Sin resultados</h3>
+            <p class="empty-message">No encontramos suscripciones vinculadas a la empresa ID "<strong>{{terminoBusqueda()}}</strong>".<br>Intenta con otro número.</p>
+            <button class="med-btn-secondary mt-3" (click)="onLimpiarBusqueda()">
+                <i class="fa-solid fa-eraser me-2"></i> Limpiar Búsqueda
+            </button>
+        </div>
+        }
+
+        @if (subscriptions().length === 0 && !terminoBusqueda()) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper data-empty">
+                <i class="fa-solid fa-file-signature"></i>
+            </div>
+            <h3 class="empty-title">No hay suscripciones registradas</h3>
+            <p class="empty-message">Actualmente no existen contratos ni suscripciones activas en el sistema. Comience asignando el primer plan a una empresa.</p>
+            <button class="btn-add mt-3" id="btnAgregarSuscripcion" [routerLink]="['/subscriptions/form']">
+                <i class="fa-solid fa-plus me-2"></i> Crear Primera Suscripción
+            </button>
+        </div>
+        }
+
+        @if (subscriptions().length > 0) {
+        <div class="med-table-card">
+            <table class="table med-table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" width="25%">Empresa Cliente</th>
+                        <th scope="col">Plan Contratado</th>
+                        <th scope="col" class="text-center">Vigencia</th>
+                        <th scope="col" class="text-center">Estado</th>
+                        <th scope="col" class="text-center" width="120">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (subscription of subscriptions(); track subscription.id) {
+                    <tr>
+                        <td data-label="Empresa Cliente" class="fw-bold text-dark">
+                            <i class="fa-regular fa-building text-primary me-2 opacity-50"></i>
+                            {{subscription.companyName}}
+                        </td>
+                        
+                        <td data-label="Plan Contratado" class="text-muted fw-medium">
+                            <i class="fa-solid fa-tag me-1" style="font-size: 0.8rem;"></i>
+                            {{subscription.licenseName}}
+                        </td>
+                        
+                        <td data-label="Vigencia" class="text-md-center">
+                            <div class="d-flex flex-column gap-1 align-items-md-center">
+                                <span class="small text-muted"><i class="fa-solid fa-play text-success opacity-50 me-1" style="font-size: 0.6rem;"></i> {{subscription.startDate | date:'dd/MM/yyyy'}}</span>
+                                <span class="small text-muted"><i class="fa-solid fa-stop text-danger opacity-50 me-1" style="font-size: 0.6rem;"></i> {{subscription.endDate | date:'dd/MM/yyyy'}}</span>
+                            </div>
+                        </td>
+                        
+                        <td data-label="Estado" class="text-md-center">
+                            <span class="status-badge" [ngClass]="getStatusClass(subscription.status || '')">
+                                <i class="fa-solid fa-circle me-1" style="font-size: 0.4rem; vertical-align: middle;"></i>
+                                {{subscription.status| subscriptionStatus}}
+                            </span>
+                        </td>
+                        
+                        <td data-label="Acciones" class="text-md-center border-0-mobile">
+                            <div class="table-actions justify-content-end justify-content-md-center">
+                                <button class="btn-action view" title="Ver Detalles" (click)="abrirModal(subscription)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button class="btn-action edit" title="Editar Suscripción" [routerLink]="['/subscriptions/form', subscription.id]">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+                
+        <app-subscription-detail-component [subscription]="selectedSubscription()!"></app-subscription-detail-component>
+
+        @if (paginador()) {
+        <div class="mt-4 pb-4">
+            <app-paginator [paginador]="paginador()" (paginaSeleccionada)="onPaginaSeleccionada($event)"></app-paginator>
+        </div>
+        }
+        
+    </div>
+</div>

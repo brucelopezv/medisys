@@ -1,0 +1,52 @@
+@if (paginas.length > 0) {
+<div class="med-pagination-container">
+
+    <div class="pagination-desktop">
+        <button class="page-btn nav-btn" (click)="cambiarPagina(1)" [disabled]="paginador.first"
+            aria-label="Primera página">
+            <i class="fa-solid fa-angles-left"></i>
+        </button>
+
+        <button class="page-btn nav-btn" (click)="cambiarPagina(paginador.page.number)" [disabled]="paginador.first"
+            aria-label="Anterior">
+            <i class="fa-solid fa-angle-left"></i>
+        </button>
+
+        <div class="page-numbers">
+            @for (pagina of paginas; track $index) {
+            <button class="page-btn number-btn" (click)="cambiarPagina(pagina)"
+                [class.active]="pagina - 1 === paginador.page.number">
+                {{ pagina }}
+            </button>
+            }
+        </div>
+
+        <button class="page-btn nav-btn" (click)="cambiarPagina(paginador.page.number + 2)" [disabled]="paginador.last"
+            aria-label="Siguiente">
+            <i class="fa-solid fa-angle-right"></i>
+        </button>
+
+        <button class="page-btn nav-btn" (click)="cambiarPagina(paginador.page.totalPages)" [disabled]="paginador.last"
+            aria-label="Última página">
+            <i class="fa-solid fa-angles-right"></i>
+        </button>
+    </div>
+
+    <div class="pagination-mobile">
+        <button class="page-btn nav-btn-mobile" (click)="cambiarPagina(paginador.page.number)"
+            [disabled]="paginador.first">
+            <i class="fa-solid fa-angle-left"></i> Ant
+        </button>
+
+        <span class="page-info">
+            Pág. <span class="fw-bold page-highlight">{{paginador.page.number + 1}}</span> de
+            {{paginador.page.totalPages}}
+        </span>
+
+        <button class="page-btn nav-btn-mobile" (click)="cambiarPagina(paginador.page.number + 2)"
+            [disabled]="paginador.last">
+            Sig <i class="fa-solid fa-angle-right"></i>
+        </button>
+    </div>
+</div>
+}

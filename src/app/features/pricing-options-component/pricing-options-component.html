@@ -1,0 +1,117 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4 d-flex justify-content-between align-items-end flex-wrap gap-3">
+        <div>
+            <h2 class="page-title">Gestión de Precios</h2>
+            <p class="page-subtitle">Configure las tarifas, ciclos de facturación y duración de los planes de licencia.
+            </p>
+        </div>
+
+        @if (pricings!.length > 0 || terminoBusqueda) {
+        <div class="header-actions">
+            <button class="btn-add" id="btnNuevoPrecio" [routerLink]="['/pricing/form']">
+                <i class="fa-solid fa-plus me-2"></i> Nuevo Precio
+            </button>
+        </div>
+        }
+    </div>
+
+    @if (pricings!.length > 0 || terminoBusqueda) {
+    <div class="med-toolbar mb-4">
+        <app-searchbar-component placeholder="Buscar por nombre de licencia..." (buscar)="onBuscar($event)"
+            (limpiar)="onLimpiarBusqueda()">
+        </app-searchbar-component>
+    </div>
+    }
+
+    <div class="data-section">
+
+        @if (pricings!.length > 0 && pricingSearched!.length === 0 && terminoBusqueda) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper search-empty">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3 class="empty-title">Sin resultados</h3>
+            <p class="empty-message">No encontramos configuraciones de precio para la licencia
+                "<strong>{{terminoBusqueda}}</strong>".<br>Intenta con otro término.</p>
+            <button class="med-btn-secondary mt-3" (click)="onLimpiarBusqueda()">
+                <i class="fa-solid fa-eraser me-2"></i> Limpiar Búsqueda
+            </button>
+        </div>
+        }
+
+        @if (pricings!.length === 0) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper data-empty">
+                <i class="fa-solid fa-tags"></i>
+            </div>
+            <h3 class="empty-title">No hay precios configurados</h3>
+            <p class="empty-message">Aún no ha registrado ninguna tarifa o ciclo de facturación para los planes.
+                Comience agregando la primera configuración.</p>
+            <button class="btn-add mt-3" id="btnAgregarPrecio" [routerLink]="['/pricing/form']">
+                <i class="fa-solid fa-plus me-2"></i> Configurar Primer Precio
+            </button>
+        </div>
+        }
+
+        @if (pricingSearched!.length > 0) {
+        <div class="med-table-card">
+            <table class="table med-table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre de Licencia</th>
+                        <th scope="col" class="text-center">Ciclo de Facturación</th>
+                        <th scope="col" class="text-center">Duración de Contrato</th>
+                        <th scope="col" class="text-end">Precio</th>
+                        <th scope="col" class="text-center" width="100">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (pricing of pricingSearched; track pricing.id) {
+                    <tr>
+                        <td data-label="Nombre de Licencia" class="fw-bold text-dark">
+                            <i class="fa-regular fa-credit-card text-primary me-2 d-none d-md-inline"></i>
+                            {{pricing.licenseTypeName}}
+                        </td>
+
+                        <td data-label="Ciclo de Facturación" class="text-md-center text-muted">
+                            <i class="fa-solid fa-arrows-rotate me-1" style="font-size: 0.8rem;"></i>
+                            {{pricing.billingCycle | billingCycleTranslatePipe}}
+                        </td>
+
+                        <td data-label="Duración" class="text-md-center text-muted">
+                            <i class="fa-regular fa-calendar me-1" style="font-size: 0.8rem;"></i>
+                            {{pricing.contractDurationMonths}} @if(pricing.contractDurationMonths > 1){meses} @else
+                            {mes}
+                        </td>
+
+                        <td data-label="Precio" class="text-md-end">
+                            <span
+                                class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2 rounded-pill fs-6">
+                                {{pricing.price | currency:'GTQ':'symbol-narrow'}}
+                            </span>
+                        </td>
+
+                        <td data-label="Acciones" class="text-md-center border-0-mobile">
+                            <div class="table-actions justify-content-end justify-content-md-center">
+                                <button class="btn-action edit" title="Editar"
+                                    [routerLink]="['/pricing/form', pricing.id]">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+        @if (paginador) {
+        <div class="mt-4 pb-4">
+            <app-paginator [paginador]="paginador" (paginaSeleccionada)="onPaginaSeleccionada($event)"></app-paginator>
+        </div>
+        }
+
+    </div>
+</div>

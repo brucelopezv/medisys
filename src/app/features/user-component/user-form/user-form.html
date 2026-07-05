@@ -1,0 +1,196 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4">
+        @if (!user().id) {
+        <h2 class="page-title"><i class="fa-solid fa-user-plus me-2 text-primary"></i> Crear Nuevo Usuario</h2>
+        <p class="page-subtitle">Registre un nuevo miembro en el sistema y asígnele los roles correspondientes.</p>
+        } @else {
+        <h2 class="page-title"><i class="fa-solid fa-user-pen me-2 text-primary"></i> Editar Usuario</h2>
+        <p class="page-subtitle">Actualizando la información de <strong>{{ user().username }}</strong></p>
+        }
+    </div>
+
+    <div class="med-form-card">
+        <form id="userForm" #form="ngForm">
+
+            <div class="form-section">
+                <h5 class="section-title"><i class="fa-solid fa-shield-halved text-slate me-2"></i> Credenciales de
+                    Acceso</h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <label for="username" class="form-label">Nombre de Usuario <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user input-icon"></i>
+                            <input type="text" class="custom-input" [(ngModel)]="user().username" id="username"
+                                name="username" required placeholder="Ej: jdoe" #username="ngModel" minlength="4">
+                        </div>
+                        @if (username.touched && username.errors?.['required']) {
+                        <small class="text-danger mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i>
+                            Obligatorio</small>
+                        }
+                        @if (username.touched && username.errors?.['minlength']) {
+                        <small class="text-danger mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i>
+                            Mínimo 4 caracteres</small>
+                        }
+                    </div>
+
+                    @if (user().id) {
+                    <div class="col-md-6">
+                        <label class="form-label text-muted">Seguridad de la Cuenta</label>
+                        <button type="button" class="btn-reset-password w-100" (click)="resetPassword(user().email)">
+                            <i class="fa-solid fa-key me-2"></i> Resetear Contraseña (Enviar a correo)
+                        </button>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h5 class="section-title"><i class="fa-regular fa-id-card text-slate me-2"></i> Información Personal
+                </h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <label for="firstName" class="form-label">Nombre <span class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-font input-icon"></i>
+                            <input type="text" class="custom-input" [(ngModel)]="user().firstName" id="firstName"
+                                name="firstName" required placeholder="Ej: Juan" #firstName="ngModel">
+                        </div>
+                        @if (firstName.touched && firstName.errors?.['required']) {
+                        <small class="text-danger mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i>
+                            Obligatorio</small>
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label">Apellido <span class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-font input-icon"></i>
+                            <input type="text" class="custom-input" [(ngModel)]="user().lastName" id="lastName"
+                                name="lastName" required placeholder="Ej: Pérez" #lastName="ngModel">
+                        </div>
+                        @if (lastName.touched && lastName.errors?.['required']) {
+                        <small class="text-danger mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i>
+                            Obligatorio</small>
+                        }
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="email" class="form-label">Correo Electrónico <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input type="email" class="custom-input" [(ngModel)]="user().email" id="email" name="email"
+                                required email placeholder="juan.perez@ejemplo.com" #email="ngModel">
+                        </div>
+                        @if (email.touched && email.errors?.['required']) {
+                        <small class="text-danger mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i>
+                            Obligatorio</small>
+                        }
+                        @if (email.touched && email.errors?.['email']) {
+                        <small class="text-danger mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i>
+                            Formato de correo inválido</small>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section border-0 mb-0">
+                <h5 class="section-title"><i class="fa-solid fa-user-gear text-slate me-2"></i> Roles y Permisos</h5>
+                <p class="text-muted small mb-3">Selecciona los niveles de acceso que tendrá este usuario en la
+                    plataforma.</p>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="med-search-input-group">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input #searchInput type="text" class="med-custom-search" placeholder="Buscar roles..."
+                                (input)="onSearchRole(searchInput.value)" [value]="searchTerm()">
+                        </div>
+                        <div class="form-text small mt-2">
+                            Mostrando {{ filteredRoles().length }} de {{ roles().length }} roles
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roles-grid-container">
+                    <div class="row g-3">
+                        @if (filteredRoles().length > 0) {
+                        @for (role of filteredRoles(); track role.id) {
+                        <div class="col-md-6 col-lg-4">
+                            <label class="role-selection-card" [class.selected]="selectedRolesIds().includes(role.id)">
+                                <div class="d-flex align-items-start gap-3">
+                                    <div class="custom-checkbox mt-1">
+                                        <input class="form-check-input" type="checkbox" [id]="'role_' + role.id"
+                                            [checked]="selectedRolesIds().includes(role.id)"
+                                            (change)="onRoleChange(role.id, $event)">
+                                    </div>
+                                    <div>
+                                        <div class="role-title">{{ role.name }}</div>
+                                        @if (role.description) {
+                                        <div class="role-desc">{{ role.description }}</div>
+                                        }
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        }
+                        } @else {
+                        <div class="col-12">
+                            <div class="empty-roles-box">
+                                <i class="fa-solid fa-inbox text-slate fs-2 mb-2"></i>
+                                <p class="mb-2">No se encontraron roles con "{{ searchTerm() }}"</p>
+                                @if (searchTerm()) {
+                                <button type="button" class="med-btn-secondary btn-sm" (click)="onSearchRole('')">
+                                    Limpiar búsqueda
+                                </button>
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                @if (selectedRolesIds().length > 0) {
+                <div class="roles-summary-alert mt-3">
+                    <i class="fa-solid fa-circle-check text-success me-2"></i>
+                    <strong>{{ selectedRolesIds().length }}</strong> Rol(es) seleccionado(s) para este usuario.
+                </div>
+                }
+            </div>
+
+            <div class="form-footer">
+                <a class="med-btn-secondary px-4" [routerLink]="isLoading() ? null : ['/users/page', 0]"
+                    [class.disabled]="isLoading()">
+                    <i class="fa-solid fa-arrow-left me-2"></i> Cancelar
+                </a>
+
+                @if (!user().id) {
+                <button type="button" class="btn-add px-4"
+                    [disabled]="!form.form.valid || selectedRolesIds().length === 0 || isLoading()" (click)="create()">
+                    @if (isLoading()) {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Guardando...
+                    } @else {
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Usuario
+                    }
+                </button>
+                } @else {
+                <button type="button" class="btn-add px-4"
+                    [disabled]="!form.form.valid || selectedRolesIds().length === 0 || isLoading()" (click)="update()">
+                    @if (isLoading()) {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Actualizando...
+                    } @else {
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Actualizar Usuario
+                    }
+                </button>
+                }
+            </div>
+
+        </form>
+    </div>
+</div>

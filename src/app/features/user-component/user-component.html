@@ -1,0 +1,123 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4 d-flex justify-content-between align-items-end flex-wrap gap-3">
+        <div>
+            <h2 class="page-title">Gestión de Usuarios</h2>
+            <p class="page-subtitle">Administre los accesos, roles y personal del sistema</p>
+        </div>
+
+        @if (users()!.length > 0 || terminoBusqueda() !== '') {
+        <div class="header-actions">
+            <button class="btn-add" id="btnNuevoUsuario" [routerLink]="['/users/form/']">
+                <i class="fa-solid fa-plus me-2"></i> Nuevo Usuario
+            </button>
+        </div>
+        }
+    </div>
+
+    @if (users()!.length > 0 || terminoBusqueda() !== '') {
+    <div class="med-toolbar mb-4">
+        <app-searchbar-component placeholder="Buscar por nombre, usuario o correo..." (buscar)="onBuscar($event)"
+            (limpiar)="onLimpiarBusqueda()">
+        </app-searchbar-component>
+    </div>
+    }
+
+    <div class="data-section">
+
+        @if (users().length === 0 && terminoBusqueda() !== '') {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper search-empty">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3 class="empty-title">Sin resultados</h3>
+            <p class="empty-message">No encontramos usuarios que coincidan con
+                "<strong>{{terminoBusqueda()}}</strong>".<br>Intenta con otro término o verifica la ortografía.</p>
+            <button class="med-btn-secondary mt-3" (click)="onLimpiarBusqueda()">
+                <i class="fa-solid fa-eraser me-2"></i> Limpiar Búsqueda
+            </button>
+        </div>
+        }
+
+        @if (users()!.length === 0 && terminoBusqueda() === '') {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper data-empty">
+                <i class="fa-solid fa-users-slash"></i>
+            </div>
+            <h3 class="empty-title">No hay usuarios registrados</h3>
+            <p class="empty-message">Actualmente no hay usuarios en el sistema. Comience agregando el primer usuario
+                administrativo o médico para habilitar el acceso.</p>
+            <button class="btn-add mt-3" id="btnAgregarPrimerUsuario" [routerLink]="['/users/form/']">
+                <i class="fa-solid fa-plus me-2"></i> Agregar Primer Usuario
+            </button>
+        </div>
+        }
+
+        @if (users()!.length > 0) {
+        <div class="med-table-card">
+            <table class="table med-table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" width="80" class="text-center">ID</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Nombre Completo</th>
+                        <th scope="col">Correo Electrónico</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" class="text-center" width="120">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (user of users(); track user.id){
+                    <tr>
+                        <td data-label="ID" class="text-md-center text-muted fw-medium">
+                            <span class="d-md-none text-muted">#</span>{{user.id}}
+                        </td>
+
+                        <td data-label="Usuario" class="fw-bold text-dark">{{user.username}}</td>
+
+                        <td data-label="Nombre Completo">
+                            <div class="d-flex align-items-center justify-content-end justify-content-md-start">
+                                <div class="avatar-sm me-3 d-none d-md-flex">
+                                    {{ user.firstName.charAt(0) }}{{ user.lastName ? user.lastName.charAt(0) : '' }}
+                                </div>
+                                <span>{{user.firstName}} {{user.lastName}}</span>
+                            </div>
+                        </td>
+
+                        <td data-label="Correo Electrónico" class="text-muted">{{user.email}}</td>
+
+                        <td data-label="Estado">
+                            <span class="status-badge" [ngClass]="getStatusClass(user.status)">
+                                <i class="fa-solid fa-circle me-1"
+                                    style="font-size: 0.4rem; vertical-align: middle;"></i>
+                                {{user.status | userStatusPipe }}
+                            </span>
+                        </td>
+
+                        <td data-label="Acciones" class="text-md-center border-0-mobile">
+                            <div class="table-actions justify-content-end justify-content-md-center">
+                                <button (click)="abrirModal(user)" class="btn-action view" title="Ver Detalle">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                                <button [routerLink]="['/users/form', user.id]" class="btn-action edit" title="Editar">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+        <app-user-detail-component [user]="selectedUser()!"></app-user-detail-component>
+
+        @if (paginador()) {
+        <div class="mt-4 pb-4">
+            <app-paginator [paginador]="paginador()"
+                (paginaSeleccionada)="onPaginaSeleccionada($event)"></app-paginator>
+        </div>
+        }
+    </div>
+</div>

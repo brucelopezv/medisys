@@ -1,0 +1,111 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4">
+        @if (!pricingOption.id) {
+        <h2 class="page-title"><i class="fa-solid fa-tag me-2 text-primary"></i> Configurar Nuevo Precio</h2>
+        <p class="page-subtitle">Establezca tarifas, ciclos de facturación y duración de contrato para un plan.</p>
+        } @else {
+        <h2 class="page-title"><i class="fa-solid fa-pen-to-square me-2 text-primary"></i> Editar Configuración de
+            Precio</h2>
+        <p class="page-subtitle">Modificando las condiciones comerciales del plan de suscripción.</p>
+        }
+    </div>
+
+    <div class="med-form-card">
+        <form id="pricingOptionForm" #form="ngForm">
+
+            <div class="form-section">
+                <h5 class="section-title"><i class="fa-solid fa-link text-slate me-2"></i> Plan a Facturar</h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <label for="licenseType" class="form-label">Tipo de Licencia <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-credit-card input-icon"></i>
+                            <select class="custom-input form-select" style="padding-left: 45px;"
+                                [(ngModel)]="pricingOption.licenseTypeId" name="licenseType" required>
+                                <option [ngValue]="undefined" disabled selected>
+                                    --- Seleccionar Tipo de Licencia ---
+                                </option>
+                                @for (licenses of licensesTypes; track licenses.id) {
+                                <option [ngValue]="licenses.id">
+                                    {{licenses.name}}
+                                </option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-text small mt-1">Seleccione a qué plan aplica este precio.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="billingCycle" class="form-label">Ciclo de Facturación <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-arrows-rotate input-icon"></i>
+                            <select [(ngModel)]="pricingOption.billingCycle" class="custom-input form-select"
+                                style="padding-left: 45px;" id="billingCycle" name="billingCycle" required>
+                                <option [ngValue]="undefined" disabled selected>
+                                    --- Seleccionar Ciclo ---
+                                </option>
+                                <option value="MONTHLY">Mensual</option>
+                                <option value="ANNUAL_MONTHLY">Anual (Pago Mensual)</option>
+                                <option value="ANNUAL_UPFRONT">Anual (Pago Único)</option>
+                            </select>
+                        </div>
+                        <div class="form-text small mt-1">Frecuencia con la que se cobrará al cliente.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section border-0 mb-0">
+                <h5 class="section-title"><i class="fa-solid fa-file-contract text-slate me-2"></i> Términos del
+                    Contrato</h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <label for="contract_duration_months" class="form-label">Duración (Meses) <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-calendar-days input-icon text-info"></i>
+                            <input [(ngModel)]="pricingOption.contractDurationMonths" type="number"
+                                class="custom-input fw-bold" id="contract_duration_months"
+                                name="contract_duration_months" min="1" max="36" required>
+                        </div>
+                        <div class="form-text small mt-1">Tiempo de permanencia o vigencia del acuerdo.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="price" class="form-label">Precio Final (GTQ) <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <span class="input-icon fw-bold text-success"
+                                style="font-style: normal; font-size: 1.1rem;">Q</span>
+                            <input [(ngModel)]="pricingOption.price" type="number"
+                                class="custom-input fw-bold text-success" id="price" name="price" min="0" step="0.01"
+                                required placeholder="0.00" style="font-size: 1.1rem;">
+                        </div>
+                        <div class="form-text small mt-1">Costo total por el ciclo seleccionado.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <a class="med-btn-secondary px-4" [routerLink]="['/pricing/page', 0]">
+                    <i class="fa-solid fa-arrow-left me-2"></i> Cancelar
+                </a>
+
+                @if (!pricingOption.id) {
+                <button type="submit" class="btn-add px-4" [disabled]="!form.form.valid" (click)="create()">
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Precio
+                </button>
+                } @else {
+                <button type="submit" class="btn-add px-4" [disabled]="!form.form.valid" (click)="update()">
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Actualizar Precio
+                </button>
+                }
+            </div>
+
+        </form>
+    </div>
+</div>

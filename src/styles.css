@@ -1,1 +1,849 @@
-/* You can add global styles to this file, and also import other style files */
+/* ==========================================================================
+   VARIABLES GLOBALES (PALETA MEDISIS)
+   ========================================================================== */
+:root {
+  --med-primary: #0ea5e9;
+  --med-primary-hover: #0284c7;
+  --med-bg: #f0f4f8;
+  --med-text-dark: #1e293b;
+  --med-text-muted: #64748b;
+  --med-input-bg: #f8fafc;
+  --med-border: #e2e8f0;
+  --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+  --transition-speed: 0.3s;
+}
+
+/* ==========================================================================
+   RESETEOS Y BODY
+   ========================================================================== */
+body {
+  background-color: var(--med-bg);
+  overflow-x: hidden;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+.bg-light-custom {
+  background-color: #f8f9fa !important;
+}
+
+/* ==========================================================================
+   LAYOUTS BASE (Contenedores)
+   ========================================================================== */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--med-bg);
+  background-image: radial-gradient(circle at top right, #e0f2fe 0%, transparent 40%);
+  padding: 20px;
+}
+
+.dashboard-center-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 130px);
+  width: 100%;
+  padding: 10px;
+}
+
+.dashboard-container {
+  padding: 10px;
+}
+
+/* Encabezados de Página */
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--med-text-dark);
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  color: var(--med-text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--med-text-dark);
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ==========================================================================
+   BOTONES GLOBALES
+   ========================================================================== */
+.btn-add {
+  background: var(--med-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-speed) ease;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(14, 165, 233, 0.1);
+}
+
+.btn-add:hover {
+  background: var(--med-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px -3px rgba(14, 165, 233, 0.3);
+  color: #ffffff;
+}
+
+.btn-add i {
+  font-size: 1.1rem;
+}
+
+.med-btn-secondary {
+  background: #ffffff;
+  color: var(--med-text-muted);
+  border: 1px solid var(--med-border);
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.med-btn-secondary:hover:not(:disabled) {
+  background: #f8fafc;
+  color: var(--med-text-dark);
+  border-color: #cbd5e1;
+}
+
+.med-btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f1f5f9;
+}
+
+/* ==========================================================================
+   INPUTS Y CONTROLES DE FORMULARIO
+   ========================================================================== */
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--med-text-dark);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  transition: color var(--transition-speed);
+}
+
+.custom-input {
+  width: 100%;
+  padding: 12px 16px 12px 45px;
+  background-color: var(--med-input-bg);
+  border: 1px solid var(--med-border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--med-text-dark);
+  transition: all var(--transition-speed) ease;
+}
+
+.custom-input::placeholder {
+  color: #cbd5e1;
+}
+
+.custom-input:focus {
+  outline: none;
+  background-color: #ffffff;
+  border-color: var(--med-primary);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+.custom-input:focus+.input-icon,
+.input-wrapper:focus-within .input-icon {
+  color: var(--med-primary);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color var(--transition-speed);
+}
+
+.password-toggle:hover {
+  color: var(--med-text-dark);
+}
+
+/* Custom Checkbox Bootstrap */
+.custom-checkbox .form-check-input {
+  cursor: pointer;
+}
+
+.custom-checkbox .form-check-input:checked {
+  background-color: var(--med-primary);
+  border-color: var(--med-primary);
+}
+
+.custom-checkbox .form-check-label {
+  color: var(--med-text-muted);
+  cursor: pointer;
+  padding-left: 4px;
+}
+
+textarea.custom-input.custom-textarea {
+  padding-top: 12px;
+  resize: vertical;
+  /* Permite al usuario estirarlo solo hacia abajo */
+  min-height: 100px;
+}
+
+/* ==========================================================================
+   TABLAS Y DATA GRID
+   ========================================================================== */
+.med-table-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--med-border);
+  overflow: hidden;
+}
+
+.med-table {
+  margin-bottom: 0;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.med-table thead th {
+  background-color: #f8fafc;
+  color: var(--med-text-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 16px;
+  border-bottom: 1px solid var(--med-border);
+  border-top: none;
+  white-space: nowrap;
+}
+
+.med-table tbody td {
+  padding: 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--med-text-dark);
+  font-size: 0.95rem;
+}
+
+.med-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.med-table tbody tr {
+  transition: background-color var(--transition-speed) ease;
+}
+
+.med-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Badges e Iconos de tabla */
+.status-badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  flex-shrink: 0;
+}
+
+.badge-active {
+  background-color: #198754;
+  color: white;
+}
+
+.badge-inactive {
+  background-color: #6c757d;
+  color: white;
+}
+
+.badge-deprecated {
+  background-color: #dc3545;
+  color: white;
+}
+
+.badge-suspended {
+  background-color: #dc7835;
+  color: white;
+}
+
+.avatar-sm {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--med-bg) 0%, #e2e8f0 100%);
+  color: var(--med-primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-role-badge {
+  background-color: #f8fafc;
+  color: var(--med-text-muted);
+  border: 1px solid var(--med-border);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-role-badge:hover {
+  background-color: #f3e8ff;
+  color: #8b5cf6;
+  border-color: #ddd6fe;
+}
+
+.table-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-action {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  background-color: transparent;
+}
+
+.btn-action.view {
+  color: #64748b;
+}
+
+.btn-action.view:hover {
+  background-color: #f1f5f9;
+  color: var(--med-text-dark);
+}
+
+.btn-action.edit {
+  color: var(--med-primary);
+}
+
+.btn-action.edit:hover {
+  background-color: #e0f2fe;
+  color: var(--med-primary-hover);
+}
+
+/* Tablas en Móvil (Responsive Cards) */
+@media (max-width: 992px) {
+  .med-table-card {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+  }
+
+  .med-table thead {
+    display: none;
+  }
+
+  .med-table, .med-table tbody, .med-table tr, .med-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .med-table tr {
+    background-color: #ffffff;
+    margin-bottom: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--med-border);
+    padding: 8px 16px;
+  }
+
+  .med-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    text-align: right;
+    border-bottom: 1px dashed #e2e8f0;
+  }
+
+  .med-table tbody td:last-child,
+  .med-table tbody td.border-0-mobile {
+    border-bottom: none;
+    padding-bottom: 4px;
+    margin-top: 8px;
+    justify-content: flex-end;
+  }
+
+  .med-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--med-text-muted);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    float: left;
+    text-align: left;
+  }
+}
+
+/* ==========================================================================
+   TARJETAS DE MÓDULOS (Dashboard y Configuración)
+   ========================================================================== */
+.modern-module-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--med-border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.modern-module-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 35px -10px rgba(14, 165, 233, 0.15);
+  border-color: #bae6fd;
+}
+
+.module-card-body {
+  padding: 30px 24px 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.module-icon-container {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+}
+
+.module-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--med-text-dark);
+  margin-bottom: 12px;
+}
+
+.module-desc {
+  color: var(--med-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.module-card-footer {
+  padding: 0 24px 24px;
+  margin-top: auto;
+}
+
+.btn-access-module {
+  width: 100%;
+  background-color: var(--med-input-bg);
+  color: var(--med-primary);
+  border: 1px solid var(--med-border);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all var(--transition-speed) ease;
+  cursor: pointer;
+}
+
+.modern-module-card:hover .btn-access-module {
+  background-color: var(--med-primary);
+  color: white;
+  border-color: var(--med-primary);
+}
+
+/* ==========================================================================
+   GRADIENTES PARA ÍCONOS Y TARJETAS (15 Colores Armónicos)
+   ========================================================================== */
+
+/* 1. Azul (Sky) */
+.bg-blue-gradient {
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+}
+
+/* 2. Pizarra (Slate) */
+.bg-slate-gradient {
+  background: linear-gradient(135deg, #94a3b8 0%, #475569 100%);
+}
+
+/* 3. Esmeralda (Emerald) */
+.bg-emerald-gradient {
+  background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+}
+
+/* 4. Violeta (Violet) */
+.bg-violet-gradient {
+  background: linear-gradient(135deg, #a78bfa 0%, #6d28d9 100%);
+}
+
+/* 5. Ámbar (Amber) */
+.bg-amber-gradient {
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+}
+
+/* 6. Rosa (Rose) */
+.bg-rose-gradient {
+  background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+}
+
+/* 7. Cian (Cyan) */
+.bg-cyan-gradient {
+  background: linear-gradient(135deg, #22d3ee 0%, #0891b2 100%);
+}
+
+/* 8. Índigo (Indigo) - [NUEVO] Ideal para seguridad o ajustes primarios */
+.bg-indigo-gradient {
+  background: linear-gradient(135deg, #818cf8 0%, #4f46e5 100%);
+}
+
+/* 9. Fucsia (Fuchsia) - [NUEVO] Excelente para integraciones o temas visuales */
+.bg-fuchsia-gradient {
+  background: linear-gradient(135deg, #e879f9 0%, #c026d3 100%);
+}
+
+/* 10. Verde Azulado (Teal) - [NUEVO] Muy corporativo, bueno para facturación */
+.bg-teal-gradient {
+  background: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%);
+}
+
+/* 11. Naranja (Orange) - [NUEVO] Llama a la acción, notificaciones o alertas */
+.bg-orange-gradient {
+  background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+}
+
+/* 12. Rosado Suave (Pink) - [NUEVO] Alternativa al Rose, más amigable */
+.bg-pink-gradient {
+  background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+}
+
+/* 13. Lima (Lime) - [NUEVO] Refrescante, ideal para rendimiento o estatus online */
+.bg-lime-gradient {
+  background: linear-gradient(135deg, #a3e635 0%, #65a30d 100%);
+}
+
+/* 14. Rojo (Red) - [NUEVO] Para zonas de peligro (Danger Zone) o eliminación */
+.bg-red-gradient {
+  background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+}
+
+/* 15. Zinc (Zinc) - [NUEVO] Un gris ligeramente más cálido y metálico que el Slate */
+.bg-zinc-gradient {
+  background: linear-gradient(135deg, #a1a1aa 0%, #52525b 100%);
+}
+
+/* ==========================================================================
+   ESTADOS VACÍOS (EMPTY STATES)
+   ========================================================================== */
+.med-empty-state {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 2px dashed var(--med-border);
+  padding: 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  transition: all var(--transition-speed) ease;
+}
+
+.med-empty-state:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+}
+
+.empty-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.empty-icon-wrapper.search-empty {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+.empty-icon-wrapper.data-empty {
+  background-color: #e0f2fe;
+  color: var(--med-primary);
+}
+
+.empty-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--med-text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.empty-message {
+  color: var(--med-text-muted);
+  font-size: 0.95rem;
+  max-width: 450px;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   MODALES GLOBALES (MEDISIS STYLE)
+   ========================================================================== */
+.med-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.4);
+  /* Slate muy oscuro translúcido */
+  backdrop-filter: blur(4px);
+  /* Difumina lo que está detrás */
+  z-index: 1040;
+}
+
+.med-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  /* Centra el modal verticalmente en PC */
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.med-modal-dialog {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  /* Permite scroll si el modal es muy alto */
+}
+
+.med-modal-content {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.med-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--med-border, #e2e8f0);
+}
+
+.med-modal-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--med-text-dark, #1e293b);
+  margin: 0;
+}
+
+.btn-close-modal {
+  background: transparent;
+  border: none;
+  color: var(--med-text-muted, #64748b);
+  font-size: 1.25rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-close-modal:hover {
+  background-color: #f1f5f9;
+  color: #ef4444;
+  /* Rojo al intentar cerrar */
+}
+
+.med-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--med-border, #e2e8f0);
+  background-color: #f8fafc;
+}
+
+/* Animación de entrada */
+.animacion {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+/* Círculo de ícono principal (Company) */
+.icon-circle-premium {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8), inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Tipografía pequeña y espaciada para las etiquetas (Look factura) */
+.label-fine {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+/* Tipografía de valor fuerte y nítida */
+.value-fine {
+  font-size: 1rem;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+/* Separador elegante con estilo "recibo" */
+.divider-fine {
+  border-top: 1px dashed #cbd5e1;
+  margin: 1.5rem 0;
+}
+
+/* Caja de tiempo restante */
+.urgency-box {
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.urgency-box:hover {
+  background-color: #f1f5f9;
+}
+
+.fadeIn {
+  animation-name: modalFadeIn;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (max-width: 576px) {
+  .med-modal-container {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .med-modal-content {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    max-height: 90vh;
+    /* Se convierte en un Bottom Sheet en móviles */
+  }
+
+  .med-modal-body {
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 993px) {
+  .med-modal-container {
+    padding-left: calc(250px + 1rem);
+  }
+}

@@ -1,0 +1,62 @@
+<div class="login-wrapper">
+    <div class="login-card">
+        <div class="login-header">
+            <div class="brand-logo">
+                <div class="logo-circle">
+                    <img src="images/logo.png" alt="MediSis" class="logo-img" onerror="this.style.display='none'">                    
+                </div>
+                <h2 class="brand-text">MediSis</h2>
+            </div>
+            <h1 class="login-title">Bienvenido</h1>
+            <p class="login-subtitle">Ingrese sus credenciales para acceder al sistema</p>
+        </div>
+
+        <div class="login-body">
+            <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                <div class="form-group mb-4">
+                    <label for="username" class="form-label">Usuario</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-user input-icon"></i>
+                        <input type="text" class="custom-input" formControlName="username" id="username" name="username"
+                            placeholder="ej. doctor_perez" required>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" class="custom-input" id="password" name="password" placeholder="••••••••"
+                            formControlName="password" required>
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="login-options mb-4">
+                    <div class="form-check custom-checkbox">
+                        <input class="form-check-input" type="checkbox" id="remember">
+                        <label class="form-check-label" for="remember">Recordarme</label>
+                    </div>
+                    <a routerLink="/forgot-password" class="forgot-link">¿Olvidó su contraseña?</a>
+                </div>
+
+                <button type="submit" [disabled]="loginForm.invalid || isLoading()" class="btn-login w-100">
+                    @if (isLoading()) {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <span>Verificando...</span>
+                    } @else {
+                    <span>Iniciar Sesión</span>
+                    <i class="bi bi-arrow-right ms-2"></i>
+                    }
+                </button>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            <p></p>
+        </div>
+    </div>
+</div>

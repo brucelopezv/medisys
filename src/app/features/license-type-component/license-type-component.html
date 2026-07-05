@@ -1,0 +1,145 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4 d-flex justify-content-between align-items-end flex-wrap gap-3">
+        <div>
+            <h2 class="page-title">Gestión de Planes</h2>
+            <p class="page-subtitle">Administre los tipos de licencia, su visibilidad y configuraciones</p>
+        </div>
+
+        @if (licenses!.length > 0 || terminoBusqueda) {
+        <div class="header-actions">
+            <button class="btn-add" id="btnNuevoPlan" [routerLink]="['/licenses/form']">
+                <i class="fa-solid fa-plus me-2"></i> Nuevo Plan
+            </button>
+        </div>
+        }
+    </div>
+
+    @if (licenses!.length > 0 || terminoBusqueda) {
+    <div class="med-toolbar mb-4">
+        <app-searchbar-component placeholder="Buscar planes de licencia..." (buscar)="onBuscar($event)"
+            (limpiar)="onLimpiarBusqueda()">
+        </app-searchbar-component>
+    </div>
+    }
+
+    <div class="data-section">
+
+        @if (licenses!.length > 0 && licensesSearched!.length === 0 && terminoBusqueda) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper search-empty">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3 class="empty-title">Sin resultados</h3>
+            <p class="empty-message">No encontramos planes que coincidan con
+                "<strong>{{terminoBusqueda}}</strong>".<br>Intenta con otro término de búsqueda.</p>
+            <button class="med-btn-secondary mt-3" (click)="onLimpiarBusqueda()">
+                <i class="fa-solid fa-eraser me-2"></i> Limpiar Búsqueda
+            </button>
+        </div>
+        }
+
+        @if (licenses!.length === 0) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper data-empty">
+                <i class="fa-regular fa-credit-card"></i>
+            </div>
+            <h3 class="empty-title">No hay planes registrados</h3>
+            <p class="empty-message">Actualmente no hay planes de licencia en el sistema. Comience agregando el primer
+                plan de suscripción.</p>
+            <button class="btn-add mt-3" id="btnAgregarPlan" [routerLink]="['/licenses/form']">
+                <i class="fa-solid fa-plus me-2"></i> Agregar Primer Plan
+            </button>
+        </div>
+        }
+
+        @if (licensesSearched!.length > 0) {
+        <div class="med-table-card">
+            <table class="table med-table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" width="80" class="text-center">ID</th>
+                        <th scope="col">Nombre del Plan</th>
+                        <th scope="col" class="text-center">Visible al Público</th>
+                        <th scope="col" class="text-center">Personalizado</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" class="text-center" width="120">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (license of licensesSearched; track license.id) {
+                    <tr>
+                        <td data-label="ID" class="text-md-center text-muted fw-medium">
+                            <span class="d-md-none text-muted">#</span>{{license.id}}
+                        </td>
+
+                        <td data-label="Nombre del Plan" class="fw-bold text-dark">{{license.name}}</td>
+
+                        <td data-label="Visible al Público" class="text-md-center">
+                            @if (license.visibleToPublic) {
+                            <span
+                                class="badge text-success bg-success bg-opacity-10 border border-success border-opacity-25 px-2 py-1 rounded-pill">
+                                <i class="fa-regular fa-eye me-1"></i> Visible
+                            </span>
+                            } @else {
+                            <span
+                                class="badge text-secondary bg-secondary bg-opacity-10 border border-secondary border-opacity-25 px-2 py-1 rounded-pill">
+                                <i class="fa-solid fa-eye-slash me-1"></i> Oculto
+                            </span>
+                            }
+                        </td>
+
+                        <td data-label="Personalizado" class="text-md-center">
+                            @if (license.isCustom) {
+                            <span
+                                class="badge text-primary bg-primary bg-opacity-10 border border-primary border-opacity-25 px-2 py-1 rounded-pill">
+                                <i class="fa-solid fa-star me-1"></i> Sí
+                            </span>
+                            } @else {
+                            <span class="text-muted"><i class="fa-solid fa-minus"></i></span>
+                            }
+                        </td>
+
+                        <td data-label="Estado">
+                            <span class="status-badge" [ngClass]="{
+                                'badge-active': license.status === LicenseTypeStatus.ACTIVE,
+                                'badge-inactive': license.status === LicenseTypeStatus.INACTIVE,
+                                'badge-deprecated': license.status === LicenseTypeStatus.DEPRECATED
+                            }">
+                                <i class="fa-solid fa-circle me-1"
+                                    style="font-size: 0.4rem; vertical-align: middle;"></i>
+                                {{license.status | statusTranslate}}
+                            </span>
+                        </td>
+
+                        <td data-label="Acciones" class="text-md-center border-0-mobile">
+                            <div class="table-actions justify-content-end justify-content-md-center">
+
+                                <button class="btn-action view" title="Ver Detalle" (click)="abrirModal(license)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+
+                                <button class="btn-action edit" title="Editar"
+                                    [routerLink]="['/licenses/form', license.id]">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+        <app-license-detail-component [licenseType]="selected!"></app-license-detail-component>
+
+        @if (paginador) {
+        <div class="mt-4 pb-4">
+            <app-paginator [paginador]="paginador" (paginaSeleccionada)="onPaginaSeleccionada($event)"></app-paginator>
+        </div>
+        }
+
+    </div>
+</div>

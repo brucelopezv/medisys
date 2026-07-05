@@ -1,0 +1,142 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4 d-flex justify-content-between align-items-end flex-wrap gap-3">
+        <div>
+            <h2 class="page-title">Gestión de Empresas</h2>
+            <p class="page-subtitle">Administre las empresas o clínicas registradas en la plataforma.</p>
+        </div>
+
+        @if (companies!.length > 0 || terminoBusqueda) {
+        <div class="header-actions">
+            <button class="btn-add" id="btnNuevaEmpresa" [routerLink]="['/companies/form']">
+                <i class="fa-solid fa-plus me-2"></i> Nueva Empresa
+            </button>
+        </div>
+        }
+    </div>
+
+    @if (companies!.length > 0 || terminoBusqueda) {
+    <div class="med-toolbar mb-4">
+        <app-searchbar-component placeholder="Buscar empresas por nombre o NIT..." (buscar)="onBuscar($event)"
+            (limpiar)="onLimpiarBusqueda()">
+        </app-searchbar-component>
+    </div>
+    }
+
+    <div class="data-section">
+
+        @if (companies!.length > 0 && companiesSearched!.length === 0 && terminoBusqueda) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper search-empty">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3 class="empty-title">Sin resultados</h3>
+            <p class="empty-message">No encontramos empresas que coincidan con
+                "<strong>{{terminoBusqueda}}</strong>".<br>Intenta con otro término de búsqueda.</p>
+            <button class="med-btn-secondary mt-3" (click)="onLimpiarBusqueda()">
+                <i class="fa-solid fa-eraser me-2"></i> Limpiar Búsqueda
+            </button>
+        </div>
+        }
+
+        @if (companies!.length === 0) {
+        <div class="med-empty-state">
+            <div class="empty-icon-wrapper data-empty">
+                <i class="fa-regular fa-building"></i>
+            </div>
+            <h3 class="empty-title">No hay empresas registradas</h3>
+            <p class="empty-message">Actualmente no hay ninguna clínica o empresa registrada en el sistema. Comience
+                agregando el primer cliente corporativo.</p>
+            <button class="btn-add mt-3" id="btnAgregarEmpresa" [routerLink]="['/companies/form']">
+                <i class="fa-solid fa-plus me-2"></i> Registrar Primera Empresa
+            </button>
+        </div>
+        }
+
+        @if (companiesSearched!.length > 0) {
+        <div class="med-table-card">
+            <table class="table med-table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">Empresa</th>
+                        <th scope="col">Contacto</th>
+                        <th scope="col" class="text-center">Verificada</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" class="text-center" width="100">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (company of companiesSearched; track company.id) {
+                    <tr>
+                        <td data-label="Empresa" class="fw-bold text-dark">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="avatar-sm d-none d-md-flex bg-slate-soft text-slate border-0">
+                                    <i class="fa-regular fa-building"></i>
+                                </div>
+                                <div>
+                                    <div class="mb-1">{{company.name}}</div>
+                                    <div class="text-muted small fw-normal"><i class="fa-solid fa-hashtag me-1"></i>
+                                        NIT: {{company.taxId || 'N/A'}}</div>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td data-label="Contacto" class="text-muted">
+                            <div class="d-flex flex-column gap-1">
+                                <div><i class="fa-regular fa-envelope me-2"
+                                        style="font-size: 0.85rem;"></i>{{company.contactEmail}}</div>
+                                <div><i class="fa-solid fa-phone me-2"
+                                        style="font-size: 0.85rem;"></i>{{company.contactPhone}}</div>
+                            </div>
+                        </td>
+
+                        <td data-label="Verificada" class="text-md-center">
+                            @if(company.emailVerified) {
+                            <span
+                                class="badge text-success bg-success bg-opacity-10 border border-success border-opacity-25 px-2 py-1 rounded-pill">
+                                <i class="fa-solid fa-check-circle me-1"></i> Sí
+                            </span>
+                            } @else {
+                            <span
+                                class="badge text-warning bg-warning bg-opacity-10 border border-warning border-opacity-25 px-2 py-1 rounded-pill">
+                                <i class="fa-regular fa-clock me-1"></i> Pendiente
+                            </span>
+                            }
+                        </td>
+
+                        <td data-label="Estado">
+                            <span class="status-badge" [ngClass]="{
+                                'badge-active': company.status === CompanyStatus.ACTIVE,
+                                'badge-inactive': company.status === CompanyStatus.INACTIVE,
+                                'badge-deprecated': company.status === CompanyStatus.PENDING,
+                                'badge-suspended': company.status === CompanyStatus.SUSPENDED
+                            }">
+                                <i class="fa-solid fa-circle me-1"
+                                    style="font-size: 0.4rem; vertical-align: middle;"></i>
+                                {{company.status | companyStatusPipe}}
+                            </span>
+                        </td>
+
+                        <td data-label="Acciones" class="text-md-center border-0-mobile">
+                            <div class="table-actions justify-content-end justify-content-md-center">
+                                <button class="btn-action edit" title="Editar"
+                                    [routerLink]="['/companies/form', company.id]">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+        @if (paginador) {
+        <div class="mt-4 pb-4">
+            <app-paginator [paginador]="paginador" (paginaSeleccionada)="onPaginaSeleccionada($event)"></app-paginator>
+        </div>
+        }
+
+    </div>
+</div>

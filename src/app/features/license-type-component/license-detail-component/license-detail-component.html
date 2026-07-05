@@ -1,0 +1,154 @@
+@if (modalService.modal) {
+<div class="med-modal-backdrop" (click)="cerrarModal()"></div>
+
+<div class="med-modal-container animacion fadeIn">
+    <div class="med-modal-dialog">
+        <div class="med-modal-content">
+
+            <div class="med-modal-header">
+                <h5 class="med-modal-title">
+                    <i class="fa-regular fa-credit-card text-primary me-2"></i> Detalle del Plan
+                </h5>
+                <button type="button" class="btn-close-modal" (click)="cerrarModal()" aria-label="Cerrar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="med-modal-body p-4">
+
+                <div class="user-summary-card mb-4">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                        <div>
+                            <h3 class="user-fullname mb-2">{{licenseType.name}}</h3>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span
+                                    class="badge text-secondary bg-secondary bg-opacity-10 border border-secondary border-opacity-25 rounded-pill px-2">
+                                    ID: #{{licenseType.id}}
+                                </span>
+                                @if (licenseType.visibleToPublic) {
+                                <span
+                                    class="badge text-success bg-success bg-opacity-10 border border-success border-opacity-25 rounded-pill px-2">
+                                    <i class="fa-regular fa-eye me-1"></i> Público
+                                </span>
+                                }
+                                @if (licenseType.isCustom) {
+                                <span
+                                    class="badge text-primary bg-primary bg-opacity-10 border border-primary border-opacity-25 rounded-pill px-2">
+                                    <i class="fa-solid fa-star me-1"></i> Personalizado
+                                </span>
+                                }
+                            </div>
+                        </div>
+                        <div>
+                            <span class="status-badge" [ngClass]="{
+                                'badge-active': licenseType.status === 'ACTIVE',
+                                'badge-inactive': licenseType.status === 'INACTIVE',
+                                'badge-deprecated': licenseType.status === 'DEPRECATED'
+                            }">
+                                <i class="fa-solid fa-circle me-1"
+                                    style="font-size: 0.4rem; vertical-align: middle;"></i>
+                                {{licenseType.status | statusTranslate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="med-info-card mb-4">
+                    <div class="info-card-header">
+                        <i class="fa-solid fa-align-left text-slate me-2"></i> Descripción
+                    </div>
+                    <div class="info-card-body">
+                        @if (licenseType.description) {
+                        <p class="mb-0 text-dark">{{licenseType.description}}</p>
+                        } @else {
+                        <p class="text-muted fst-italic mb-0 text-center py-2">No hay descripción disponible para este
+                            plan.</p>
+                        }
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="med-stat-box text-center p-3 h-100">
+                            <div class="stat-icon-wrapper text-primary bg-primary bg-opacity-10 mx-auto mb-2">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </div>
+                            <h3 class="fw-bold text-dark mb-0">{{licenseType.maxPatients}}</h3>
+                            <small class="text-muted">Expedientes</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="med-stat-box text-center p-3 h-100">
+                            <div class="stat-icon-wrapper text-success bg-success bg-opacity-10 mx-auto mb-2">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <h3 class="fw-bold text-dark mb-0">{{licenseType.maxUsers || 'Ilimitado'}}</h3>
+                            <small class="text-muted">Usuarios</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="med-stat-box text-center p-3 h-100">
+                            <div class="stat-icon-wrapper text-info bg-info bg-opacity-10 mx-auto mb-2">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                            <h3 class="fw-bold text-dark mb-0">{{licenseType.maxDoctors || 'Ilimitado'}}</h3>
+                            <small class="text-muted">Doctores</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-12">
+                        <div class="med-info-card h-100">
+                            <div class="info-card-header">
+                                <i class="fa-solid fa-cubes text-slate me-2"></i> Módulos Incluidos
+                            </div>
+                            <div class="info-card-body">
+                                <div class="roles-container">
+                                    @for (module of licenseType.modules; track $index) {
+                                    <div class="role-chip">
+                                        <i class="fa-solid fa-check text-success me-1"></i> {{ module.name }}
+                                    </div>
+                                    }
+
+                                    @if (!licenseType.modules || licenseType.modules.length == 0) {
+                                    <div class="empty-roles text-center p-3 w-100">
+                                        <i class="fa-solid fa-inbox text-slate fs-3 mb-2 d-block"></i>
+                                        <span class="text-muted small">No hay módulos habilitados en este plan.</span>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="med-info-card h-100">
+                            <div class="info-card-header">
+                                <i class="fa-solid fa-note-sticky text-slate me-2"></i> Notas Internas
+                            </div>
+                            <div class="info-card-body">
+                                @if (licenseType.notes) {
+                                <p class="mb-0 text-dark" style="white-space: pre-wrap;">{{licenseType.notes}}</p>
+                                } @else {
+                                <div class="text-center text-muted py-2">
+                                    <p class="mb-0 fst-italic">No hay notas internas registradas.</p>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="med-modal-footer">
+                <button type="button" class="med-btn-secondary" (click)="cerrarModal()">Cerrar</button>               
+            </div>
+
+        </div>
+    </div>
+</div>
+}

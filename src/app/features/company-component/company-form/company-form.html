@@ -1,0 +1,157 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4">
+        @if (!company.id) {
+        <h2 class="page-title"><i class="fa-regular fa-building me-2 text-primary"></i> Registrar Nueva Empresa</h2>
+        <p class="page-subtitle">Ingrese los datos comerciales, fiscales y de contacto del nuevo cliente institucional.
+        </p>
+        } @else {
+        <h2 class="page-title"><i class="fa-solid fa-pen-to-square me-2 text-primary"></i> Editar Empresa</h2>
+        <p class="page-subtitle">Modificando el perfil de: <strong>{{ company.name }}</strong></p>
+        }
+    </div>
+
+    <div class="med-form-card">
+        <form id="companyForm" #form="ngForm">
+
+            <div class="form-section">
+                <h5 class="section-title"><i class="fa-solid fa-briefcase text-slate me-2"></i> Información Legal y
+                    Comercial</h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Nombre Comercial <span class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-shop input-icon"></i>
+                            <input [(ngModel)]="company.name" type="text" class="custom-input" id="name" name="name"
+                                required placeholder="Ej: Mi Empresa S.A." #name="ngModel">
+                        </div>
+                        @if (name?.touched && name?.errors?.['required']) {
+                        <small class="text-danger mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i> El
+                            nombre comercial es obligatorio</small>
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="legal_name" class="form-label">Razón Social</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-scale-balanced input-icon"></i>
+                            <input [(ngModel)]="company.legalName" type="text" class="custom-input" id="legal_name"
+                                name="legal_name" placeholder="Ej: Mi Empresa Sociedad Anónima">
+                        </div>
+                        <div class="form-text small mt-1">Nombre legal completo registrado.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="tax_id" class="form-label">Identificación Tributaria (NIT)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-hashtag input-icon"></i>
+                            <input [(ngModel)]="company.taxId" type="text" class="custom-input fw-bold text-dark"
+                                id="tax_id" name="tax_id" placeholder="Ej: 12345678-9">
+                        </div>
+                        <div class="form-text small mt-1">RUT, NIT, o registro fiscal.</div>
+                    </div>
+
+                    @if (company.id) {
+                    <div class="col-md-6">
+                        <label for="status" class="form-label">Estado de la Cuenta <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-signal input-icon"></i>
+                            <select [(ngModel)]="company.status" class="custom-input form-select fw-bold"
+                                style="padding-left: 45px;" id="status" name="status" required>
+                                <option value="PENDING" class="text-warning">Pendiente</option>
+                                <option value="ACTIVE" class="text-success">Activo</option>
+                                <option value="INACTIVE" class="text-secondary">Inactivo</option>
+                                <option value="SUSPENDED" class="text-danger">Suspendido</option>
+                            </select>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h5 class="section-title"><i class="fa-regular fa-address-book text-slate me-2"></i> Información de
+                    Contacto</h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <label for="contact_email" class="form-label">Email Principal <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input [(ngModel)]="company.contactEmail" type="email" class="custom-input"
+                                id="contact_email" name="contact_email" required placeholder="contacto@empresa.com"
+                                #email="ngModel">
+                        </div>
+                        @if (email?.touched && email?.errors?.['required']) {
+                        <small class="text-danger mt-1 d-block"><i class="fa-solid fa-circle-exclamation me-1"></i> El
+                            email es obligatorio</small>
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="contact_phone" class="form-label">Teléfono de Contacto</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-phone input-icon"></i>
+                            <input [(ngModel)]="company.contactPhone" type="tel" class="custom-input" id="contact_phone"
+                                name="contact_phone" placeholder="Ej: +502 5555 0000">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="website" class="form-label">Sitio Web</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-globe input-icon"></i>
+                            <input [(ngModel)]="company.website" type="url" class="custom-input" id="website"
+                                name="website" placeholder="https://www.empresa.com">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section border-0 mb-0">
+                <h5 class="section-title"><i class="fa-solid fa-map-location-dot text-slate me-2"></i> Ubicación</h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-8">
+                        <label for="address" class="form-label">Dirección Físico-Fiscal</label>
+                        <div class="input-wrapper align-items-start">
+                            <i class="fa-solid fa-location-dot input-icon mt-3 text-danger"></i>
+                            <textarea [(ngModel)]="company.address" class="custom-input custom-textarea" id="address"
+                                name="address" rows="3"
+                                placeholder="Calle, avenida, zona, ciudad, departamento..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="postal_code" class="form-label">Código Postal</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-envelopes-bulk input-icon"></i>
+                            <input [(ngModel)]="company.postalCode" type="text" class="custom-input" id="postal_code"
+                                name="postal_code" placeholder="Ej: 01001">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <a class="med-btn-secondary px-4" [routerLink]="['/companies/page', 0]">
+                    <i class="fa-solid fa-arrow-left me-2"></i> Cancelar
+                </a>
+
+                @if (!company.id) {
+                <button type="submit" class="btn-add px-4" (click)="create()" [disabled]="!form.form.valid">
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Empresa
+                </button>
+                } @else {
+                <button type="submit" class="btn-add px-4" (click)="update()" [disabled]="!form.form.valid">
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Actualizar Empresa
+                </button>
+                }
+            </div>
+
+        </form>
+    </div>
+</div>

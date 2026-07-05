@@ -1,0 +1,119 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4">
+        <h2 class="page-title">Panel de Control</h2>
+        <p class="page-subtitle">Resumen de actividad y acceso a módulos del sistema</p>
+    </div>
+
+    <div class="row mb-5 g-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="kpi-card">
+                <div class="kpi-body">
+                    <div class="kpi-info">
+                        <h5 class="kpi-title">Pacientes Activos</h5>
+                        <h2 class="kpi-value">2,458</h2>
+                        <p class="kpi-trend trend-up">
+                            <i class="fa-solid fa-arrow-trend-up"></i> 8% este mes
+                        </p>
+                    </div>
+                    <div class="kpi-icon-wrapper bg-blue-soft">
+                        <i class="fa-solid fa-users kpi-icon text-blue"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="kpi-card">
+                <div class="kpi-body">
+                    <div class="kpi-info">
+                        <h5 class="kpi-title">Citas Hoy</h5>
+                        <h2 class="kpi-value">42</h2>
+                        <p class="kpi-trend trend-neutral">
+                            <i class="fa-solid fa-minus"></i> Igual que ayer
+                        </p>
+                    </div>
+                    <div class="kpi-icon-wrapper bg-green-soft">
+                        <i class="fa-regular fa-calendar-check kpi-icon text-green"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="kpi-card">
+                <div class="kpi-body">
+                    <div class="kpi-info">
+                        <h5 class="kpi-title">Ingresos Estimados</h5>
+                        <h2 class="kpi-value">$12,450</h2>
+                        <p class="kpi-trend trend-up">
+                            <i class="fa-solid fa-arrow-trend-up"></i> 12% este mes
+                        </p>
+                    </div>
+                    <div class="kpi-icon-wrapper bg-purple-soft">
+                        <i class="fa-solid fa-wallet kpi-icon text-purple"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="kpi-card">
+                <div class="kpi-body">
+                    <div class="kpi-info">
+                        <h5 class="kpi-title">Alertas Médicas</h5>
+                        <h2 class="kpi-value">3</h2>
+                        <p class="kpi-trend trend-down">
+                            <i class="fa-solid fa-circle-exclamation"></i> Requieren atención
+                        </p>
+                    </div>
+                    <div class="kpi-icon-wrapper bg-red-soft">
+                        <i class="fa-solid fa-bell kpi-icon text-red"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modules-section">
+        <h3 class="section-title mb-4">Módulos del Sistema</h3>
+
+        <div class="row g-4">
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-blue-gradient">
+                            <i class="fa-regular fa-calendar"></i>
+                        </div>
+                        <h3 class="module-name">Gestión de Citas</h3>
+                        <p class="module-desc">Programa, modifica y gestiona todas las citas médicas de la clínica.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" routerLink="/citas">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-slate-gradient">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3 class="module-name">Configuración</h3>
+                        <p class="module-desc">Configura parámetros del sistema, roles y preferencias de usuario.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" routerLink="/config">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

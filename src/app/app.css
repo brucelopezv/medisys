@@ -1,0 +1,29 @@
+/* Contenido principal (Layout Autenticado) */
+#content {
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    transition: all var(--transition-speed) ease;
+    margin-left: 250px;
+}
+
+@media (max-width: 992px) {
+    #sidebar {
+        margin-left: -250px;
+        position: fixed;
+        height: 100%;
+        z-index: 1040;
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+
+    #content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .overlay.active {
+        display: block;
+    }
+}

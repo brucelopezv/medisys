@@ -1,0 +1,150 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4">
+        <h2 class="page-title">Configuración del Sistema</h2>
+        <p class="page-subtitle">Administración central de plataforma, planes, empresas y usuarios</p>
+    </div>
+
+    <div class="modules-section">
+
+        <div class="row g-4">
+
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-blue-gradient">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+                        <h3 class="module-name">Módulos</h3>
+                        <p class="module-desc">Crea, modifica y gestiona todos los módulos de la plataforma.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" [routerLink]="['/modules/page', 0]">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-teal-gradient">
+                            <i class="fa-regular fa-credit-card"></i>
+                        </div>
+                        <h3 class="module-name">Planes</h3>
+                        <p class="module-desc">Crea, modifica y gestiona todos los planes de suscripción.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" [routerLink]="['/licenses/page', 0]">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-violet-gradient">
+                            <i class="fa-regular fa-money-bill-1"></i>
+                        </div>
+                        <h3 class="module-name">Precios</h3>
+                        <p class="module-desc">Configura los precios de los planes y su periodicidad de cobro.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" [routerLink]="['/pricing/page', 0]">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-slate-gradient">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <h3 class="module-name">Empresas</h3>
+                        <p class="module-desc">Configure y gestione las clínicas o empresas suscritas.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" [routerLink]="['/companies/page', 0]">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-amber-gradient">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3 class="module-name">Permisos</h3>
+                        <p class="module-desc">Configure y gestione los niveles de acceso de la plataforma.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" [routerLink]="['/permissions/page', 0]">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-rose-gradient">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <h3 class="module-name">Roles</h3>
+                        <p class="module-desc">Agrupe permisos y gestione los roles disponibles.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" [routerLink]="['/roles/page', 0]">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-cyan-gradient">
+                            <i class="fa-solid fa-user-group"></i>
+                        </div>
+                        <h3 class="module-name">Usuarios</h3>
+                        <p class="module-desc">Administre las cuentas de usuario, altas y bajas del sistema.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" [routerLink]="['/users/page', 0]">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="modern-module-card">
+                    <div class="module-card-body">
+                        <div class="module-icon-container bg-emerald-gradient">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+                        <h3 class="module-name">Suscripciones</h3>
+                        <p class="module-desc">Administre las suscripciones de las compañías.</p>
+                    </div>
+                    <div class="module-card-footer">
+                        <button class="btn-access-module" [routerLink]="['/subscriptions/page', 0]">
+                            Acceder <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

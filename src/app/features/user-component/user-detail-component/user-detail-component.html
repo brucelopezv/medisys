@@ -1,0 +1,92 @@
+@if (modal.modal) {
+<div class="med-modal-backdrop" (click)="cerrarModal()"></div>
+
+<div class="med-modal-container animacion fadeIn">
+    <div class="med-modal-dialog">
+        <div class="med-modal-content">
+            
+            <div class="med-modal-header">
+                <h5 class="med-modal-title">
+                    <i class="fa-regular fa-id-badge text-primary me-2"></i> Perfil de Usuario
+                </h5>
+                <button type="button" class="btn-close-modal" (click)="cerrarModal()" aria-label="Cerrar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="med-modal-body p-4">
+                
+                <div class="user-summary-card mb-4">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="avatar-lg">
+                                {{ user.firstName.charAt(0) }}{{ user.lastName ? user.lastName.charAt(0) : '' }}
+                            </div>
+                            <div>
+                                <h3 class="user-fullname mb-1">{{user.firstName}} {{user.lastName}}</h3>
+                                <p class="user-email mb-0"><i class="fa-regular fa-envelope me-1"></i> {{user.email}}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="status-badge" [ngClass]="getStatusClass(user.status)">
+                                <i class="fa-solid fa-circle me-1" style="font-size: 0.4rem; vertical-align: middle;"></i>
+                                {{user.status | userStatusPipe }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    
+                    <div class="col-md-6">
+                        <div class="med-info-card h-100">
+                            <div class="info-card-header">
+                                <i class="fa-solid fa-shield-halved text-slate me-2"></i> Detalles de Cuenta
+                            </div>
+                            <div class="info-card-body">
+                                <div class="info-row">
+                                    <span class="info-label">Nombre de Usuario</span>
+                                    <span class="info-value fw-bold text-dark">{{user.username}}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">ID del Sistema</span>
+                                    <span class="info-value">#{{user.id}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="med-info-card h-100">
+                            <div class="info-card-header">
+                                <i class="fa-solid fa-user-gear text-slate me-2"></i> Roles Asignados
+                            </div>
+                            <div class="info-card-body">
+                                <div class="roles-container">
+                                    @for (role of user.roles; track $index) {
+                                        <div class="role-chip">
+                                            <i class="fa-solid fa-check text-success me-1"></i> {{ role.name }}
+                                        </div>
+                                    }
+                                    
+                                    @if (!user.roles || user.roles.length == 0) {
+                                        <div class="empty-roles text-center p-3">
+                                            <i class="fa-solid fa-triangle-exclamation text-warning mb-2 fs-4 d-block"></i>
+                                            <span class="text-muted small">Este usuario no tiene roles asignados.</span>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="med-modal-footer">
+                <button type="button" class="med-btn-secondary" (click)="cerrarModal()">Cerrar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+}

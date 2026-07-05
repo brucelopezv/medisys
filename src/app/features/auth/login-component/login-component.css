@@ -1,0 +1,21 @@
+@import '../auth-shared.css';
+
+/* Opciones de Login (Recordarme / Olvidé contraseña) */
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.forgot-link {
+    color: var(--med-primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot-link:hover {
+    color: var(--med-primary-hover);
+    text-decoration: underline;
+}

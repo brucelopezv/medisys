@@ -1,0 +1,175 @@
+/* ==========================================================================
+   SIDEBAR (MENÚ LATERAL)
+   ========================================================================== */
+.med-sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid var(--med-border, #e2e8f0);
+    transition: transform var(--transition-speed) ease;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Encabezado del Sidebar */
+.sidebar-header {
+    height: 70px;
+    /* Misma altura exacta que el top-bar para alineación perfecta */
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--med-border, #e2e8f0);
+}
+
+.brand-sidebar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-squircle-small {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--med-primary);
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.logo-img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    position: absolute;
+    z-index: 2;
+}
+
+.fallback-icon {
+    position: absolute;
+    z-index: 1;
+}
+
+.brand-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--med-text-dark);
+    letter-spacing: -0.5px;
+}
+
+/* Contenedor de Enlaces */
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 0;
+}
+
+/* Lista de Navegación */
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    /* Espacio entre los botones */
+    padding: 0 1rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    /* Estilo píldora/redondeado */
+    color: var(--med-text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.nav-icon {
+    width: 24px;
+    font-size: 1.1rem;
+    margin-right: 12px;
+    text-align: center;
+    transition: color 0.2s ease;
+}
+
+/* Estados (Hover y Active) */
+.nav-link:hover {
+    background-color: var(--med-bg);
+    color: var(--med-text-dark);
+}
+
+.nav-link.active {
+    background-color: #e0f2fe;
+    /* Azul muy claro */
+    color: var(--med-primary);
+}
+
+.nav-link.active .nav-icon {
+    color: var(--med-primary);
+}
+
+/* Pie del Sidebar */
+.sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--med-border, #e2e8f0);
+}
+
+.logout-link {
+    color: #ef4444;
+    /* Rojo alerta */
+}
+
+.logout-link:hover {
+    background-color: #fef2f2;
+    /* Fondo rojo clarito */
+    color: #dc2626;
+}
+
+.logout-link .nav-icon {
+    color: #ef4444;
+}
+
+/* ==========================================================================
+   OVERLAY Y RESPONSIVE (MÓVILES)
+   ========================================================================== */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(30, 41, 59, 0.4);
+    /* Gris azulado translúcido */
+    backdrop-filter: blur(2px);
+    /* Un toque moderno difuminando el fondo */
+    z-index: 1040;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+@media (max-width: 992px) {
+    .med-sidebar {
+        transform: translateX(-100%);
+        box-shadow: none;
+    }
+
+    .med-sidebar.active {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+    }
+}

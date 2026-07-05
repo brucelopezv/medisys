@@ -1,0 +1,163 @@
+/* ==========================================================================
+   BARRA SUPERIOR (HEADER)
+   ========================================================================== */
+.med-top-bar {
+    background-color: #ffffff;
+    height: 70px;
+    /* Altura fija para alinear correctamente con el sidebar */
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px -10px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--med-border, #e2e8f0);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Toggle para Móviles */
+.btn-mobile-toggle {
+    background: none;
+    border: none;
+    color: var(--med-text-muted);
+    font-size: 1.25rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-mobile-toggle:hover {
+    background-color: var(--med-bg);
+    color: var(--med-primary);
+}
+
+/* Insignia de la Empresa/Clínica */
+.company-badge {
+    background-color: #f8fafc;
+    border: 1px solid var(--med-border);
+    border-radius: 10px;
+    padding: 6px 14px 6px 6px;
+    color: var(--med-text-dark);
+    font-size: 0.9rem;
+}
+
+.company-icon {
+    background-color: #e0f2fe;
+    color: var(--med-primary);
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+/* Divisor Vertical */
+.topbar-divider {
+    width: 1px;
+    height: 30px;
+    background-color: var(--med-border);
+    margin: 0 10px;
+}
+
+/* Botón de Notificaciones Moderno */
+.notification-btn {
+    position: relative;
+    background: none;
+    border: none;
+    color: var(--med-text-muted);
+    font-size: 1.25rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.notification-btn:hover {
+    background-color: #f0fdf4;
+    /* Verde muy suave */
+    color: #10b981;
+    /* Verde éxito para notificaciones */
+}
+
+/* Badge de Notificaciones */
+.notification-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: #ef4444;
+    /* Rojo vibrante */
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    /* Borde blanco para separarlo del icono */
+    transform: scale(1);
+    transition: transform 0.2s ease;
+}
+
+.notification-btn:hover .notification-badge {
+    transform: scale(1.1);
+}
+
+/* Widget de Perfil de Usuario */
+.user-profile-widget {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 12px;
+    transition: background-color 0.2s ease;
+}
+
+.user-profile-widget:hover {
+    background-color: var(--med-bg);
+}
+
+.user-name {
+    font-weight: 600;
+    color: var(--med-text-dark);
+    font-size: 0.95rem;
+    line-height: 1.2;
+}
+
+.user-role {
+    font-size: 0.75rem;
+    color: var(--med-text-muted);
+}
+
+/* Avatar del Usuario (Squircle con Degradado) */
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--med-primary) 0%, #0284c7 100%);
+    color: white;
+    border-radius: 12px;
+    /* Forma de squircle, a juego con el logo del login */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px -2px rgba(14, 165, 233, 0.4);
+    /* Sombra azulada */
+    border: 2px solid #ffffff;
+}

@@ -1,0 +1,49 @@
+<div class="sidebar-overlay" [class.active]="isSidebarActive" (click)="toggleSidebar()"></div>
+
+<nav id="sidebar" class="med-sidebar" [class.active]="isSidebarActive">
+    <div class="sidebar-header">
+        <div class="brand-sidebar">
+            <div class="logo-squircle-small">
+                
+                <img src="images/logo.png" alt="MediSis" class="logo-img" onerror="this.style.display='none'">
+            </div>
+            <span class="brand-text">MediSis</span>
+        </div>
+    </div>
+
+    <div class="sidebar-content">
+        <ul class="nav-list list-unstyled">
+            @if (authService.currentUser()?.mustChangePassword === false) {
+            <li class="nav-item">
+                <a routerLink="/dashboard" routerLinkActive="active" class="nav-link" (click)="closeSidebar()">
+                    <i class="fa-solid fa-house nav-icon"></i>
+                    <span class="nav-text">Inicio</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/users/page/0" routerLinkActive="active" class="nav-link" (click)="closeSidebar()">
+                    <i class="fa-solid fa-users nav-icon"></i>
+                    <span class="nav-text">Usuarios</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/config" routerLinkActive="active" class="nav-link" (click)="closeSidebar()">
+                    <i class="fa-solid fa-gears nav-icon"></i>
+                    <span class="nav-text">Configuración</span>
+                </a>
+            </li>
+            }
+        </ul>
+    </div>
+
+    <div class="sidebar-footer">
+        <ul class="nav-list list-unstyled mb-0">
+            <li class="nav-item">
+                <a href="javascript:void(0)" class="nav-link logout-link" (click)="logout()">
+                    <i class="fa-solid fa-right-from-bracket nav-icon"></i>
+                    <span class="nav-text">Cerrar Sesión</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

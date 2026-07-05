@@ -1,0 +1,14 @@
+.header {
+    background: linear-gradient(120deg, var(--primary-color), var(--primary-color));
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}

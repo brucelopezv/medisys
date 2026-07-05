@@ -1,0 +1,17 @@
+<div class="med-searchbar-wrapper">
+    <div class="med-search-input-group">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" class="med-custom-search" [(ngModel)]="termino" (keyup.enter)="onBuscar()"
+            placeholder="{{ placeholder || 'Buscar registros...' }}">
+    </div>
+
+    <div class="med-search-buttons">
+        <button class="med-btn-primary" id="btnBuscar" (click)="onBuscar()">
+            <i class="fa-solid fa-magnifying-glass me-2"></i> Buscar
+        </button>
+
+        <button class="med-btn-secondary" id="btnCancelarBusqueda" (click)="onLimpiar()" [disabled]="!termino">
+            <i class="fa-solid fa-xmark me-2"></i> Cancelar
+        </button>
+    </div>
+</div>

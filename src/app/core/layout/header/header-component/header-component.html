@@ -1,0 +1,38 @@
+@if (authService.currentUser(); as user) {
+<header class="med-top-bar">
+    <div class="d-flex align-items-center gap-3">
+
+        <button class="btn-mobile-toggle d-lg-none" (click)="toggleSidebar()" aria-label="Abrir menú">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="company-badge d-none d-sm-flex align-items-center">
+            <div class="company-icon">
+                <i class="fa-regular fa-hospital"></i>
+            </div>
+            <span class="fw-bold">{{ user.companyName }}</span>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 gap-md-4">
+
+        <button class="notification-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </button>
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <div class="user-profile-widget">
+            <div class="user-info text-end d-none d-md-block me-3">
+                <div class="user-name">{{ user.firstName }} {{ user.lastName }}</div>
+                <div class="user-role">Administrador</div>
+            </div>
+
+            <div class="user-avatar shadow-sm">
+                {{ userInitials() }}
+            </div>
+        </div>
+    </div>
+</header>
+}

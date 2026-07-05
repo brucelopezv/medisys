@@ -1,0 +1,87 @@
+@if (modalService.modal) {
+<div class="med-modal-backdrop" (click)="modalService.cerrarModal()"></div>
+
+<div class="med-modal-container animacion fadeIn">
+    <div class="med-modal-dialog" style="max-width: 550px;">
+        <div class="med-modal-content position-relative">
+
+            <button type="button" class="btn-close-modal position-absolute top-0 end-0 m-3" style="z-index: 10;"
+                (click)="modalService.cerrarModal()" aria-label="Cerrar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="med-modal-body p-4 p-md-5">
+                @if (subscription) {
+
+                <div class="d-flex align-items-center gap-4 mb-4">
+                    <div class="icon-circle-premium">
+                        <i class="fa-regular fa-building"></i>
+                    </div>
+                    <div>
+                        <span class="label-fine mb-1">Cliente Institucional</span>
+                        <h3 class="mb-0 fw-bold text-dark" style="letter-spacing: -0.5px;">
+                            {{ subscription.companyName }}
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="divider-fine"></div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-6">
+                        <span class="label-fine">Plan Contratado</span>
+                        <div class="value-fine d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-tag text-primary opacity-75" style="font-size: 0.85rem;"></i>
+                            {{ subscription.licenseName }}
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <span class="label-fine">Estado Actual</span>
+                        <div>
+                            <span class="status-badge px-0 bg-transparent fw-bold" [class]="getUrgencyClass()">
+                                <i class="fa-solid fa-circle me-1"
+                                    style="font-size: 0.4rem; vertical-align: middle;"></i>
+                                {{ subscription.status | subscriptionStatus}}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <span class="label-fine">Inicio de Contrato</span>
+                        <div class="value-fine text-muted">
+                            {{ subscription.startDate | date:'dd/MM/yyyy' }}
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <span class="label-fine">Fin de Contrato</span>
+                        <div class="value-fine text-dark fw-bold">
+                            {{ subscription.endDate | date:'dd/MM/yyyy' }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="urgency-box mt-2">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                            style="width: 40px; height: 40px;">
+                            <i class="fa-regular fa-clock fs-5 text-slate"></i>
+                        </div>
+                        <div>
+                            <span class="label-fine mb-0">Renovación en</span>
+                            <span class="value-fine" [class]="getUrgencyClass()">
+                                {{ getRemainingText() }}
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,116 @@
+
+
+/* ==========================================================================
+   Tarjetas KPI (Estadísticas Superiores)
+   ========================================================================== */
+.kpi-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--med-border, #e2e8f0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+.kpi-body {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.kpi-info {
+    flex: 1;
+}
+
+.kpi-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--med-text-muted, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.kpi-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--med-text-dark, #1e293b);
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.kpi-trend {
+    font-size: 0.85rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.trend-up {
+    color: #10b981;
+}
+
+/* Verde éxito */
+.trend-down {
+    color: #ef4444;
+}
+
+/* Rojo alerta */
+.trend-neutral {
+    color: #64748b;
+}
+
+/* Gris */
+
+/* Iconos KPI - Fondos suaves */
+.kpi-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.bg-blue-soft {
+    background-color: #e0f2fe;
+}
+
+.text-blue {
+    color: #0ea5e9;
+}
+
+.bg-green-soft {
+    background-color: #dcfce7;
+}
+
+.text-green {
+    color: #10b981;
+}
+
+.bg-purple-soft {
+    background-color: #f3e8ff;
+}
+
+.text-purple {
+    color: #8b5cf6;
+}
+
+.bg-red-soft {
+    background-color: #fee2e2;
+}
+
+.text-red {
+    color: #ef4444;
+}
+
+

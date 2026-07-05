@@ -1,0 +1,90 @@
+<div class="dashboard-container">
+
+    <div class="page-header mb-4">
+        @if (!permission.id) {
+        <h2 class="page-title"><i class="fa-solid fa-key me-2 text-primary"></i> Crear Nuevo Permiso</h2>
+        <p class="page-subtitle">Defina una nueva acción o regla de acceso para el sistema.</p>
+        } @else {
+        <h2 class="page-title"><i class="fa-solid fa-pen-to-square me-2 text-primary"></i> Editar Permiso</h2>
+        <p class="page-subtitle">Modificando la regla de acceso: <strong>{{ permission.action }}</strong></p>
+        }
+    </div>
+
+    <div class="med-form-card">
+        <form id="permissionForm" #form="ngForm">
+
+            <div class="form-section">
+                <h5 class="section-title"><i class="fa-solid fa-cube text-slate me-2"></i> Módulo Afectado</h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <label for="module" class="form-label">Módulo <span class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-layer-group input-icon"></i>
+                            <select class="custom-input form-select" style="padding-left: 45px;"
+                                [(ngModel)]="permission.moduleId" name="module" required>
+                                <option [ngValue]="undefined" disabled selected>
+                                    --- Seleccionar Módulo ---
+                                </option>
+                                @for (module of modules; track module.moduleId) {
+                                <option [ngValue]="module.moduleId">
+                                    {{module.moduleName}}
+                                </option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-text small mt-1">Módulo del sistema al que pertenece esta acción.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section border-0 mb-0">
+                <h5 class="section-title"><i class="fa-solid fa-terminal text-slate me-2"></i> Detalles de la Acción
+                </h5>
+
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <label for="action" class="form-label">Acción (Código) <span
+                                class="text-danger">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-code input-icon"></i>
+                            <input [(ngModel)]="permission.action" type="text" class="custom-input fw-bold" id="action"
+                                name="action" required placeholder="Ej: CREATE_USER"
+                                style="font-family: monospace; letter-spacing: 0.5px;">
+                        </div>
+                        <div class="form-text small mt-1">Nombre técnico de la acción. Use mayúsculas y guiones bajos.
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="description" class="form-label">Descripción</label>
+                        <div class="input-wrapper align-items-start">
+                            <i class="fa-solid fa-align-left input-icon mt-3"></i>
+                            <textarea [(ngModel)]="permission.description" class="custom-input custom-textarea"
+                                id="description" name="description" rows="3"
+                                placeholder="Ej: Permite al usuario crear un nuevo registro en la base de datos..."></textarea>
+                        </div>
+                        <div class="form-text small mt-1">Explique claramente qué permite hacer esta regla.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <a class="med-btn-secondary px-4" [routerLink]="['/permissions/page', 0]">
+                    <i class="fa-solid fa-arrow-left me-2"></i> Cancelar
+                </a>
+
+                @if (!permission.id) {
+                <button type="submit" class="btn-add px-4" (click)="create()" [disabled]="!form.form.valid">
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Permiso
+                </button>
+                } @else {
+                <button type="submit" class="btn-add px-4" (click)="update()" [disabled]="!form.form.valid">
+                    <i class="fa-solid fa-floppy-disk me-2"></i> Actualizar Permiso
+                </button>
+                }
+            </div>
+
+        </form>
+    </div>
+</div>

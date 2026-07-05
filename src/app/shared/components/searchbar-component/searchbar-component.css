@@ -1,0 +1,143 @@
+/* ==========================================================================
+   HOST DEL COMPONENTE ANGULAR
+   ========================================================================== */
+:host {
+    display: block;
+    width: 100%;
+}
+
+/* ==========================================================================
+   BARRA DE BÚSQUEDA (ESCRITORIO - POR DEFECTO)
+   ========================================================================== */
+.med-searchbar-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.med-search-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    background-color: #ffffff;
+    border: 1px solid var(--med-border, #e2e8f0);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.med-search-input-group:focus-within {
+    border-color: var(--med-primary, #0ea5e9);
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    color: var(--med-text-muted, #64748b);
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.med-search-input-group:focus-within .search-icon {
+    color: var(--med-primary, #0ea5e9);
+}
+
+.med-custom-search {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
+    color: var(--med-text-dark, #1e293b);
+    outline: none;
+}
+
+.med-custom-search::placeholder {
+    color: #cbd5e1;
+}
+
+.med-search-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.med-btn-primary {
+    background: var(--med-primary, #0ea5e9);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.med-btn-primary:hover {
+    background: var(--med-primary-hover, #0284c7);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px -3px rgba(14, 165, 233, 0.3);
+}
+
+.med-btn-secondary {
+    background: #ffffff;
+    color: var(--med-text-muted, #64748b);
+    border: 1px solid var(--med-border, #e2e8f0);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.med-btn-secondary:hover:not(:disabled) {
+    background: #f8fafc;
+    color: var(--med-text-dark, #1e293b);
+    border-color: #cbd5e1;
+}
+
+.med-btn-secondary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #f1f5f9;
+}
+
+/* ==========================================================================
+   MÓVILES (FORZADO CON !IMPORTANT)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .med-searchbar-wrapper {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        max-width: 100% !important;
+    }
+
+    .med-search-input-group {
+        width: 100% !important;
+    }
+
+    .med-search-buttons {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    .med-btn-primary,
+    .med-btn-secondary {
+        width: 100% !important;
+        padding: 12px !important;
+    }
+}

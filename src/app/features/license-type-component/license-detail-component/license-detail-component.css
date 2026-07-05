@@ -1,0 +1,83 @@
+/* Tarjeta Principal de Resumen */
+.user-summary-card {
+    background: linear-gradient(to right, #ffffff, #f8fafc);
+    border: 1px solid var(--med-border, #e2e8f0);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.user-fullname {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--med-text-dark, #1e293b);
+}
+
+/* Tarjetas Internas de Información */
+.med-info-card {
+    border: 1px solid var(--med-border, #e2e8f0);
+    border-radius: 12px;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.info-card-header {
+    background-color: #f8fafc;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--med-text-dark, #1e293b);
+    border-bottom: 1px solid var(--med-border, #e2e8f0);
+}
+
+.text-slate {
+    color: #64748b;
+}
+
+.info-card-body {
+    padding: 16px;
+}
+
+/* "Chips" para mostrar módulos (mismo estilo que los roles) */
+.roles-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.role-chip {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* ==========================================================================
+   CAJAS DE ESTADÍSTICAS / LÍMITES
+   ========================================================================== */
+.med-stat-box {
+    background-color: #f8fafc;
+    border: 1px solid var(--med-border, #e2e8f0);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.med-stat-box:hover {
+    background-color: #ffffff;
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}

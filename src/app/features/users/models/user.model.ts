@@ -1,6 +1,6 @@
 
-import { Role } from "../roles-component/Role";
-import { UserStatus } from "./UserStatus";
+import { Role } from "../../roles-component/Role";
+import { UserStatus } from "./user-status.enum";
 
 export interface User {
     id?: number;

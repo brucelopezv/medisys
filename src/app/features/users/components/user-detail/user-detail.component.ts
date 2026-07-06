@@ -1,16 +1,18 @@
-import { Component, inject, Input} from '@angular/core';
-import { UserStatusPipe } from '../../../shared/pipes/user-status-pipe';
+import { Component, inject, Input } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
-import { User } from '../User';
-import { ModalService } from '../../../core/services/modal-service';
-import { UserStatus } from '../UserStatus';
+import { ModalService } from '../../../../core/services/modal-service';
+import { UserStatus } from '../../models/user-status.enum';
+import { UserStatusPipe } from '../../../../shared/pipes/user-status-pipe';
+import { User } from '../../models/user.model';
+
 
 @Component({
   selector: 'app-user-detail-component',
   standalone: true,
   imports: [CommonModule, UserStatusPipe],
-  templateUrl: './users-details.html',
-  styleUrl: './users-details.css'
+  templateUrl: './user-detail.component.html',
+  styleUrl: './user-detail.component.css'
 })
 export class UserDetailComponent {
   @Input() user!: User;

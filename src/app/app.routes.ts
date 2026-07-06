@@ -8,20 +8,22 @@ import { PricingOptionsComponent } from './features/pricing-options-component/pr
 import { PricingOptionFormComponent } from './features/pricing-options-component/pricing-option-component/pricing-option-form';
 import { CompanyForm } from './features/company-component/company-form/companies-form';
 import { RolesComponent } from './features/roles-component/roles';
-import { UserForm } from './features/user-component/user-form/user-form';
+
 import { publicGuard } from './core/guards/public.guard';
 import { passwordChangeGuard } from './core/guards/passwordChange.guard';
 import { roleGuard } from './core/guards/role.guard';
 import { LoginComponent } from './features/auth/login-component/login';
 import { ForgotPasswordComponent } from './features/auth/forgot-password-component/forgot-password-component';
 import { ForcePasswordChangeComponent } from './features/auth/force-password-change-component/force-password-change-component';
-import { UserComponent } from './features/user-component/users';
+
 import { LicenseTypeComponent } from './features/license-type-component/licenses-types';
 import { PermissionComponent } from './features/permission-component/permissions';
 import { CompanyComponent } from './features/company-component/companies';
 import { PermissionFormComponent } from './features/permission-component/permission-form-component/permissions-form';
 import { LicenseFormComponent } from './features/license-type-component/license-form-component/licenses-form';
 import { SubscriptionsComponent } from './features/subscriptions-component/subscriptions';
+import { UserComponent } from './features/users/pages/user-list/users';
+import { UserForm } from './features/users/components/user-form/user-form.component';
 
 
 export const routes: Routes = [

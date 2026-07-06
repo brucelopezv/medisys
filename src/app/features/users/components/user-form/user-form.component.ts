@@ -1,21 +1,22 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { NotificationService } from '../../../core/services/notification-service';
-import { UserService } from '../user-service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NotificationService } from '../../../../core/services/notification-service';
+import { UserService } from '../../services/user.service';
+import { RoleService } from '../../../roles-component/role-service';
+import { AuthService } from '../../../auth/services/auth-service';
+import { User } from '../../models/user.model';
+import { Role } from '../../../roles-component/Role';
 
-import { Role } from '../../roles-component/Role';
-import { AuthService } from '../../auth/services/auth-service';
-import { User } from '../User';
-import { RoleService } from '../../roles-component/role-service';
+
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
   imports: [RouterModule, CommonModule, ReactiveFormsModule, FormsModule],
-  templateUrl: './user-form.html',
-  styleUrl: './user-form.css'
+  templateUrl: './user-form.component.html',
+  styleUrl: './user-form.component.css'
 })
 export class UserForm implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
@@ -137,7 +138,7 @@ export class UserForm implements OnInit {
       },
       error: (err) => {
         this.notif.error(err.error?.message || 'Error en la creación');
-        this.isLoading.set(false); 
+        this.isLoading.set(false);
       },
       complete: () => this.isLoading.set(false)
     })

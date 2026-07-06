@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { PageResponse } from '../../utils/PageResponse';
-import { User } from './User';
+import { PageResponse } from '../../../utils/PageResponse';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'

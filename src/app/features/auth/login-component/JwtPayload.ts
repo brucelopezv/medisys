@@ -1,4 +1,5 @@
-import { User } from "../../user-component/User";
+import { User } from "../../users/models/user.model";
+
 
 
 

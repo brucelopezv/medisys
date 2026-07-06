@@ -1,16 +1,17 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { UserService } from './user-service';
-import { User } from './User';
-import { NotificationService } from '../../core/services/notification-service';
-import { Paginator } from "../../shared/components/paginator/paginator";
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user.model';
+import { NotificationService } from '../../../../core/services/notification-service';
+import { Paginator } from "../../../../shared/components/paginator/paginator";
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { SearchbarComponent } from '../../shared/components/searchbar-component/searchbar-component';
+import { SearchbarComponent } from '../../../../shared/components/searchbar-component/searchbar-component';
 import { map, switchMap } from 'rxjs';
-import { ModalService } from '../../core/services/modal-service';
-import { UserStatus } from './UserStatus';
-import { UserStatusPipe } from '../../shared/pipes/user-status-pipe';
+import { ModalService } from '../../../../core/services/modal-service';
+import { UserStatus } from '../../models/user-status.enum';
+import { UserStatusPipe } from '../../../../shared/pipes/user-status-pipe';
 import { CommonModule } from '@angular/common';
-import { UserDetailComponent } from "./user-detail-component/users-details";
+import { UserDetailComponent } from '../../components/user-detail/user-detail.component';
+
 
 @Component({
   selector: 'app-user-component',

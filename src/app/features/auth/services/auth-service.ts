@@ -5,7 +5,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode'; // Importación de la librería
 import { Router } from '@angular/router';
 import { JwtPayload } from '../login-component/JwtPayload';
-import { User } from '../../user-component/User';
+import { User } from '../../users/models/user.model';
+
 
 export interface AuthResponse {
   access_token: string;

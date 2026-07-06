@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UserStatus } from '../../features/user-component/UserStatus';
+import { UserStatus } from '../../features/users/models/user-status.enum';
+
 
 
 @Pipe({
